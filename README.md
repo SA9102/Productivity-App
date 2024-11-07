@@ -4,12 +4,15 @@ Stay organised and focused with this simple yet efficient todo application.
 
 This application is not yet complete and is currently being developed on.
 
+![preview2](https://github.com/user-attachments/assets/20d9623a-6d12-43e4-8a1f-6a45fcca407c)
+
+
+
 ## Features
 
 - Create todo items
 - A todo item has a name and a priority. It can also optionally have further descriptions, and can also belong to a category
 - Can edit todo items, check them off, and delete them
-- Can create new categories
 
 Beware that this application is not yet responsive for smaller devices, though I plan to make it so.
 
@@ -17,6 +20,7 @@ Beware that this application is not yet responsive for smaller devices, though I
 
 This project is currently in development. Here are a few features I plan to add:
 
+- Create new categories
 - Sort todo items by priority
 - Order todo items by name, category etc.
 - Start and end date
