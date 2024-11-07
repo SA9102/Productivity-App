@@ -1,0 +1,37 @@
+:root {
+  --border-radius: 0.2rem;
+  --accent-red: rgb(179, 54, 54);
+  --accent-blue: rgb(49, 108, 163);
+  --accent-green: rgb(49, 163, 93);
+  --accent-cyan: rgb(49, 155, 163);
+  --accent-white-1: rgb(230, 230, 230);
+  --accent-white-2: rgb(218, 218, 218);
+  --accent-white-3: rgb(197, 197, 197);
+  --accent-white-4: rgb(177, 177, 177);
+  --accent-grey-1: rgb(23, 23, 23);
+  --accent-grey-2: rgb(29, 29, 29);
+  --accent-grey-3: rgb(35, 35, 35);
+  --accent-grey-4: rgb(43, 43, 43);
+  --accent-grey-5: rgb(56, 56, 56);
+  --accent-grey-6: rgb(62, 62, 62);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: var(--accent-white-1);
+  font-family: "Montserrat", sans-serif;
+}
+
+.btn-ghost {
+  border-width: 1px;
+  border-style: solid;
+  font-size: 1rem;
+  font-weight: 400;
+  background-color: transparent;
+  padding: 0.5rem 0.8rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.12s;
+}

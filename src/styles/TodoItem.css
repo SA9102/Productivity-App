@@ -1,0 +1,79 @@
+.todo-item {
+  border-radius: var(--border-radius);
+  background-color: var(--accent-grey-5);
+  padding: 0.5rem 1rem;
+  /* box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.199); */
+  box-shadow: 0px 2px 8px -5px black;
+  transition: all 0.12s;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.done {
+  text-decoration: line-through;
+  color: rgba(255, 255, 255, 0.425);
+}
+
+.todo-name-input {
+  /* color: var(--accent-grey-1); */
+  color: --var(--accent-white-1);
+  font-weight: 500;
+  font-size: 1rem;
+  /* background-color: var(--accent-white-2); */
+  background-color: transparent;
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.3rem;
+  outline: none;
+}
+
+.btn-edit-todo,
+.btn-delete-todo {
+  padding: 0.25rem 0.4rem;
+  font-size: 0.8rem;
+}
+
+.btn-edit-todo {
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+}
+
+.btn-edit-todo:hover {
+  background-color: var(--accent-blue);
+  color: var(--accent-white-1);
+}
+
+.btn-delete-todo {
+  border-color: var(--accent-red);
+  color: var(--accent-red);
+}
+
+.btn-delete-todo:hover {
+  background-color: var(--accent-red);
+  color: var(--accent-white-1);
+}
+
+.todo-item:hover {
+  background-color: var(--accent-grey-6);
+}
+
+.btn-update-todo {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+}
+
+.btn-update-todo:hover {
+  background-color: var(--accent-cyan);
+  color: var(--accent-grey-2);
+}
