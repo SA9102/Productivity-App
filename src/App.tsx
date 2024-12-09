@@ -30,14 +30,15 @@ const App = () => {
   let subtitle;
 
   const getEmptyTodoItem = () => {
-    return { id: uuidv4(), name: "", category: "", desc: "", priority: 1, isEditing: false, isDone: false };
+    return { id: uuidv4(), name: "", category: "", desc: "", priority: 1, isEditing: false, isDone: false, isExpanded: false };
   };
 
   const [todoList, setTodoList] = useState<TodoItemType[]>([]);
   const [isCreatingNewTodoItem, setIsCreatingNewTodoItem] = useState(false);
   const [todoItem, setTodoItem] = useState<TodoItemType>(getEmptyTodoItem());
-  const [categories, setCategories] = useState(["university", "work", "personal"]);
-
+  const [categories, setCategories] = useState(["personal", "university", "work"]);
+  const [isCreatingNewCategory, setIsCreatingNewCategory] = useState(false);
+  const [categoryInput, setCategoryInput] = useState("");
   const [modalIsOpen, setIsOpen] = useState(false);
 
   // ---------------------------------
@@ -106,13 +107,34 @@ const App = () => {
     setTodoList(todoListCopy);
   };
 
+  const handleAddCategory = () => {
+    if (categoryInput.trim() !== "") setIsCreatingNewCategory(false);
+    setCategories([...categories, categoryInput].sort());
+    setCategoryInput("");
+  };
+
+  const handleToggleExpandItem = (id: string) => {
+    let todoListCopy = [...todoList];
+    todoListCopy = todoListCopy.map((item: TodoItemType) => {
+      if (item.id === id) {
+        item.isExpanded = !item.isExpanded;
+      }
+      return item;
+    });
+    setTodoList(todoListCopy);
+  };
+
   return (
-    <main>
+    // <main>
+    <>
       {/* ------------------------------------ */}
       <div className="toolbar">
         {/* <button className="btn-ghost btn-new-todo" onClick={handleAddTodoItem}> */}
-        <button onClick={openModal} className="btn-ghost btn-new-todo">
+        <button onClick={openModal} className="btn-new-todo">
           NEW TODO
+        </button>
+        <button onClick={openModal} className="btn-edit-cat">
+          EDIT CATEGORIES
         </button>
       </div>
       <Modal isOpen={modalIsOpen} onAfterOpen={afterOpenModal} onRequestClose={closeModal} style={customStyles} contentLabel="Example Modal">
@@ -139,37 +161,51 @@ const App = () => {
           <div className="priority-section">
             <label>Priority</label>
             <div>
-              <button
-                className={"btn-ghost low priority-btn " + (todoItem.priority === 1 ? "selected" : "")}
-                onClick={() => setTodoItem({ ...todoItem, priority: 1 })}
-              >
+              <button className={"low" + (todoItem.priority === 1 ? " selected" : "")} onClick={() => setTodoItem({ ...todoItem, priority: 1 })}>
                 Low
               </button>
-              <button
-                className={"btn-ghost medium priority-btn " + (todoItem.priority === 2 ? "selected" : "")}
-                onClick={() => setTodoItem({ ...todoItem, priority: 2 })}
-              >
+              <button className={"medium" + (todoItem.priority === 2 ? " selected" : "")} onClick={() => setTodoItem({ ...todoItem, priority: 2 })}>
                 Medium
               </button>
-              <button
-                className={"btn-ghost high priority-btn " + (todoItem.priority === 3 ? "selected" : "")}
-                onClick={() => setTodoItem({ ...todoItem, priority: 3 })}
-              >
+              <button className={"high" + (todoItem.priority === 3 ? " selected" : "")} onClick={() => setTodoItem({ ...todoItem, priority: 3 })}>
                 High
               </button>
             </div>
           </div>
           <div className="category-section">
             <label>Category</label>
-            <select name="categories" id="categories">
-              {categories.map((category) => {
-                return <option value={category}>{category}</option>;
-              })}
-            </select>
+
+            <div className="category-buttons">
+              {!isCreatingNewCategory && (
+                <select name="categories" id="categories">
+                  {categories.map((category) => {
+                    return <option value={category}>{category}</option>;
+                  })}
+                </select>
+              )}
+
+              {/* <button onClick={() => setIsCreatingNewCategory(!isCreatingNewCategory)} className="btn-ghost">
+                {isCreatingNewCategory ? "Cancel" : "New"}
+              </button> */}
+            </div>
+            {isCreatingNewCategory && (
+              <>
+                <input
+                  className="modal-input"
+                  type="text"
+                  placeholder="Name"
+                  value={categoryInput}
+                  onChange={(e) => setCategoryInput(e.target.value)}
+                />
+                <button className="btn-add-item-modal" onClick={handleAddCategory}>
+                  Add
+                </button>
+              </>
+            )}
           </div>
 
           <button
-            className="btn-ghost btn-add-todo"
+            className="btn-add-item-modal"
             onClick={() => {
               if (todoItem.name.trim() !== "") {
                 handleAddTodoItem();
@@ -187,10 +223,10 @@ const App = () => {
       {/* {isCreatingNewTodoItem && (
         
       )} */}
-      <Context.Provider value={{ categories, handleUpdateTodoItem, handleDeleteTodoItem, handleToggleIsDoneTodoItem }}>
+      <Context.Provider value={{ categories, handleUpdateTodoItem, handleDeleteTodoItem, handleToggleIsDoneTodoItem, handleToggleExpandItem }}>
         <TodoList todoList={todoList} onToggleTodoEdit={handleToggleTodoEdit} />
       </Context.Provider>
-    </main>
+    </>
   );
 };
 

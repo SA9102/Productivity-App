@@ -6,6 +6,7 @@ type TodoItemType = {
   priority: number;
   isEditing: boolean;
   isDone: boolean;
+  isExpanded: boolean;
 };
 
 export default TodoItemType;

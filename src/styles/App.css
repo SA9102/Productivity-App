@@ -1,24 +1,21 @@
-/* VARIABLES */
-
 #root {
-  background-color: var(--accent-grey-1);
+  background-color: var(--accent-grey-3);
   height: 100vh;
-  padding: 7rem 30rem;
 }
 
-main {
-  border-radius: var(--border-radius);
-  background-color: var(--accent-grey-4);
-  min-height: 100%;
-  /* height: 20rem; */
-  box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.685);
-  overflow: scroll;
-  /* padding: 1rem;/ */
+.toolbar {
+  background-color: var(--accent-grey-1);
+  padding: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
 }
 
-button {
-  /* border: none; */
-  padding: 0.2rem 0.8rem;
+.btn-new-todo {
+  background-color: var(--accent-green);
+}
+
+.btn-edit-cat {
+  background-color: var(--accent-purple);
 }
 
 .todo-inputs {
@@ -37,17 +34,9 @@ button {
 .close-modal-btn {
   /* background-color: transparent; */
   background-color: rgba(255, 114, 114, 0.329);
-  border: none;
-  border-radius: 0.2rem;
   padding: 0;
   width: 20px;
   height: 20px;
-  cursor: pointer;
-  transition: all 0.12s;
-}
-
-.close-modal-btn:hover {
-  background-color: rgba(255, 114, 114, 0.459);
 }
 
 .modal-input {
@@ -74,6 +63,7 @@ button {
 .low {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+  background-color: var(--accent-grey-6);
 }
 
 .medium {
@@ -81,16 +71,18 @@ button {
   border-bottom-left-radius: 0;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+  background-color: var(--accent-grey-6);
 }
 
 .high {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+  background-color: var(--accent-grey-6);
 }
 
 .selected {
-  background-color: var(--accent-white-1);
-  color: var(--accent-grey-2);
+  background-color: var(--accent-grey-3);
+  color: var(--accent-white-1);
 }
 
 select {
@@ -100,34 +92,6 @@ select {
   padding: 0.5rem;
 }
 
-.toolbar {
-  border-top-left-radius: var(--border-radius);
-  border-top-right-radius: var(--border-radius);
-  background-color: var(--accent-grey-3);
-  padding: 0.5rem;
-}
-
-.btn-add-todo {
-  border-color: var(--accent-cyan);
-  color: var(--accent-cyan);
-}
-
-.btn-new-todo {
-  border-color: var(--accent-green);
-  color: var(--accent-green);
-}
-
-.btn-ghost:hover {
-  background-color: var(--accent-white-4);
-  color: var(--accent-grey-2);
-}
-
-.btn-add-todo:hover {
-  background-color: var(--accent-cyan);
-  color: var(--accent-grey-2);
-}
-
-.btn-new-todo:hover {
-  background-color: var(--accent-green);
-  color: var(--accent-grey-2);
+.btn-add-item-modal {
+  background-color: var(--accent-grey-1);
 }

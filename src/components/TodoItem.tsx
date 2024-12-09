@@ -33,7 +33,7 @@ const TodoItem = ({ item }: props) => {
   let subtitle;
 
   const [todoItem, setTodoItem] = useState<TodoItemType>({ ...item });
-  const { categories, handleUpdateTodoItem, handleDeleteTodoItem, handleToggleIsDoneTodoItem } = useContext(Context);
+  const { categories, handleUpdateTodoItem, handleDeleteTodoItem, handleToggleIsDoneTodoItem, handleToggleExpandItem } = useContext(Context);
   const [modalIsOpen, setIsOpen] = useState(false);
 
   // ---------------------------------
@@ -118,15 +118,34 @@ const TodoItem = ({ item }: props) => {
         </div>
       </Modal>
       <div className="todo-item" onClick={() => handleToggleIsDoneTodoItem(item.id)}>
-        <p className={item.isDone ? "done" : ""}>{item.name}</p>
-        <div className="buttons">
-          <button className="btn-ghost btn-edit-todo" onClick={(e) => openModal(e)}>
-            EDIT
-          </button>
-          <button className="btn-ghost btn-delete-todo" onClick={(e) => handleDeleteTodoItem(e, item.id)}>
-            DELETE
-          </button>
+        <div className="main">
+          <div className="arrow-and-name">
+            <i
+              onClick={(e) => {
+                handleToggleExpandItem(item.id);
+                e.stopPropagation();
+              }}
+              className={"show-hide-details " + (item.isExpanded ? "fa-solid fa-chevron-down" : "fa-solid fa-chevron-right")}
+            ></i>
+
+            <p className={item.isDone ? "done" : ""}>{item.name}</p>
+            <div className={"priority " + (item.priority === 1 ? "low-priority" : item.priority === 2 ? "medium-priority" : "high-priority")} />
+            {/* <div className="cat-badge">Travel</div> */}
+          </div>
+          <div className="buttons">
+            <button className="btn-edit-todo" onClick={(e) => openModal(e)}>
+              EDIT
+            </button>
+            <button className="btn-delete-todo" onClick={(e) => handleDeleteTodoItem(e, item.id)}>
+              DELETE
+            </button>
+          </div>
         </div>
+        {item.isExpanded && (
+          <div className="expanded-content">
+            <p className="item-desc">{item.desc}</p>
+          </div>
+        )}
       </div>
     </>
   );
