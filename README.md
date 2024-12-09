@@ -4,10 +4,6 @@ Stay organised and focused with this simple yet efficient todo application.
 
 This application is not yet complete and is currently being developed on.
 
-![preview2](https://github.com/user-attachments/assets/20d9623a-6d12-43e4-8a1f-6a45fcca407c)
-
-
-
 ## Features
 
 - Create todo items
@@ -43,6 +39,16 @@ React context is used to allow todo items to access the functions that manipulat
 
 ## Update Log
 
+### 8th December 2024
+
+- Changed design, and added a few features:
+  - Expand/minimise a task to show/hide its description
+  - Priority circle next to task name, the colour depicting priority - green for low, orange for medium, red for high
+
 ### 7th November 2024
 
 - Repository created and first commit.
+
+## Known Bugs
+
+- When you click 'edit' on a task item to open its edit modal, then you make some changes but then don't save them (you click 'X' or outside the modal), then when you click on 'edit' again, the modal will still have those changes. It should instead show what the current task item actually has.
