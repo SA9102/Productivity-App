@@ -33,7 +33,14 @@ const TodoItem = ({ item }: props) => {
   let subtitle;
 
   const [todoItem, setTodoItem] = useState<TodoItemType>({ ...item });
-  const { categories, handleUpdateTodoItem, handleDeleteTodoItem, handleToggleIsDoneTodoItem, handleToggleExpandItem } = useContext(Context);
+  const {
+    categories,
+    handleUpdateTodoItem,
+    handleDeleteTodoItem,
+    handleToggleIsDoneTodoItem,
+    handleToggleExpandItem,
+    handleNextPriorityItem,
+  } = useContext(Context);
   const [modalIsOpen, setIsOpen] = useState(false);
 
   // ---------------------------------
@@ -53,7 +60,13 @@ const TodoItem = ({ item }: props) => {
   // ---------------------------------
   return (
     <>
-      <Modal isOpen={modalIsOpen} onAfterOpen={afterOpenModal} onRequestClose={closeModal} style={customStyles} contentLabel="Example Modal">
+      <Modal
+        isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
         <div className="modal-heading">
           <h2 ref={(_subtitle) => (subtitle = _subtitle)}>New Todo</h2>
           <button className="close-modal-btn" onClick={closeModal}>
@@ -78,19 +91,28 @@ const TodoItem = ({ item }: props) => {
             <label>Priority</label>
             <div>
               <button
-                className={"btn-ghost low priority-btn " + (todoItem.priority === 1 ? "selected" : "")}
+                className={
+                  "btn-ghost low priority-btn " +
+                  (todoItem.priority === 1 ? "selected" : "")
+                }
                 onClick={() => setTodoItem({ ...todoItem, priority: 1 })}
               >
                 Low
               </button>
               <button
-                className={"btn-ghost medium priority-btn " + (todoItem.priority === 2 ? "selected" : "")}
+                className={
+                  "btn-ghost medium priority-btn " +
+                  (todoItem.priority === 2 ? "selected" : "")
+                }
                 onClick={() => setTodoItem({ ...todoItem, priority: 2 })}
               >
                 Medium
               </button>
               <button
-                className={"btn-ghost high priority-btn " + (todoItem.priority === 3 ? "selected" : "")}
+                className={
+                  "btn-ghost high priority-btn " +
+                  (todoItem.priority === 3 ? "selected" : "")
+                }
                 onClick={() => setTodoItem({ ...todoItem, priority: 3 })}
               >
                 High
@@ -117,7 +139,10 @@ const TodoItem = ({ item }: props) => {
           </button>
         </div>
       </Modal>
-      <div className="todo-item" onClick={() => handleToggleIsDoneTodoItem(item.id)}>
+      <div
+        className="todo-item"
+        onClick={() => handleToggleIsDoneTodoItem(item.id)}
+      >
         <div className="main">
           <div className="arrow-and-name">
             <i
@@ -125,18 +150,39 @@ const TodoItem = ({ item }: props) => {
                 handleToggleExpandItem(item.id);
                 e.stopPropagation();
               }}
-              className={"show-hide-details " + (item.isExpanded ? "fa-solid fa-chevron-down" : "fa-solid fa-chevron-right")}
+              className={
+                "show-hide-details " +
+                (item.isExpanded
+                  ? "fa-solid fa-chevron-down"
+                  : "fa-solid fa-chevron-right")
+              }
             ></i>
 
             <p className={item.isDone ? "done" : ""}>{item.name}</p>
-            <div className={"priority " + (item.priority === 1 ? "low-priority" : item.priority === 2 ? "medium-priority" : "high-priority")} />
+            <div
+              onClick={(e) => {
+                handleNextPriorityItem(item.id);
+                e.stopPropagation();
+              }}
+              className={
+                "priority " +
+                (item.priority === 1
+                  ? "low-priority"
+                  : item.priority === 2
+                  ? "medium-priority"
+                  : "high-priority")
+              }
+            />
             {/* <div className="cat-badge">Travel</div> */}
           </div>
           <div className="buttons">
             <button className="btn-edit-todo" onClick={(e) => openModal(e)}>
               EDIT
             </button>
-            <button className="btn-delete-todo" onClick={(e) => handleDeleteTodoItem(e, item.id)}>
+            <button
+              className="btn-delete-todo"
+              onClick={(e) => handleDeleteTodoItem(e, item.id)}
+            >
               DELETE
             </button>
           </div>

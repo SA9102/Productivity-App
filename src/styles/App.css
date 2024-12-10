@@ -18,6 +18,11 @@
   background-color: var(--accent-purple);
 }
 
+.btn-remove-completed {
+  background-color: var(--accent-red);
+  margin-left: 2rem;
+}
+
 .todo-inputs {
   display: flex;
   flex-direction: column;

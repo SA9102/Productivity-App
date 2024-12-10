@@ -39,7 +39,11 @@ React context is used to allow todo items to access the functions that manipulat
 
 ## Update Log
 
-### 8th December 2024
+### 10th December 2024
+
+- Quickly change a todo item's priority by clicking on the priority circle
+
+### 9th December 2024
 
 - Changed design, and added a few features:
   - Expand/minimise a task to show/hide its description

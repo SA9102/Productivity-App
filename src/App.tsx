@@ -30,13 +30,26 @@ const App = () => {
   let subtitle;
 
   const getEmptyTodoItem = () => {
-    return { id: uuidv4(), name: "", category: "", desc: "", priority: 1, isEditing: false, isDone: false, isExpanded: false };
+    return {
+      id: uuidv4(),
+      name: "",
+      category: "",
+      desc: "",
+      priority: 1,
+      isEditing: false,
+      isDone: false,
+      isExpanded: false,
+    };
   };
 
   const [todoList, setTodoList] = useState<TodoItemType[]>([]);
   const [isCreatingNewTodoItem, setIsCreatingNewTodoItem] = useState(false);
   const [todoItem, setTodoItem] = useState<TodoItemType>(getEmptyTodoItem());
-  const [categories, setCategories] = useState(["personal", "university", "work"]);
+  const [categories, setCategories] = useState([
+    "personal",
+    "university",
+    "work",
+  ]);
   const [isCreatingNewCategory, setIsCreatingNewCategory] = useState(false);
   const [categoryInput, setCategoryInput] = useState("");
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -88,7 +101,8 @@ const App = () => {
     setTodoList(todoListCopy);
   };
 
-  // Deletes a todo item by id
+  // Responsible for deleting an item by its id
+  //
   const handleDeleteTodoItem = (e, id: string) => {
     e.stopPropagation();
     let todoListCopy = [...todoList];
@@ -96,15 +110,17 @@ const App = () => {
     setTodoList(todoListCopy);
   };
 
-  // Toggles between whether or not an item is done (i.e. completed)
+  // Responsible for toggling an item between completed and uncompleted
+  //
   const handleToggleIsDoneTodoItem = (id: string) => {
-    let todoListCopy = todoList.map((item: TodoItemType) => {
-      if (item.id === id) {
-        item.isDone = !item.isDone;
-      }
-      return item;
-    });
-    setTodoList(todoListCopy);
+    setTodoList(
+      todoList.map((item: TodoItemType) => {
+        if (item.id === id) {
+          item.isDone = !item.isDone;
+        }
+        return item;
+      })
+    );
   };
 
   const handleAddCategory = () => {
@@ -113,16 +129,52 @@ const App = () => {
     setCategoryInput("");
   };
 
+  // Responsible for expanding or minimising a todo item
+  //
   const handleToggleExpandItem = (id: string) => {
-    let todoListCopy = [...todoList];
-    todoListCopy = todoListCopy.map((item: TodoItemType) => {
-      if (item.id === id) {
-        item.isExpanded = !item.isExpanded;
-      }
-      return item;
-    });
-    setTodoList(todoListCopy);
+    setTodoList(
+      todoList.map((item: TodoItemType) => {
+        if (item.id === id) {
+          item.isExpanded = !item.isExpanded;
+        }
+        return item;
+      })
+    );
   };
+
+  // Responsible for changing to the next priority when the
+  // priority circle on a todo item is clicked
+  //
+  const handleNextPriorityItem = (id: string) => {
+    setTodoList(
+      todoList.map((item: TodoItemType) => {
+        if (item.id === id) {
+          item.priority += 1;
+          if (item.priority > 3) {
+            item.priority = 1;
+          }
+        }
+        return item;
+      })
+    );
+  };
+
+  // Responsible for removing all items that are completed
+  //
+  const handleRemoveCompletedItems = () => {
+    setTodoList(
+      todoList.filter((item: TodoItemType) => {
+        return !item.isDone;
+      })
+    );
+  };
+
+  let completedItems = 0;
+  todoList.forEach((x, i) => {
+    if (x.isDone) {
+      completedItems += 1;
+    }
+  });
 
   return (
     // <main>
@@ -136,8 +188,22 @@ const App = () => {
         <button onClick={openModal} className="btn-edit-cat">
           EDIT CATEGORIES
         </button>
+        {completedItems > 0 && (
+          <button
+            onClick={handleRemoveCompletedItems}
+            className="btn-remove-completed"
+          >
+            REMOVE COMPLETED
+          </button>
+        )}
       </div>
-      <Modal isOpen={modalIsOpen} onAfterOpen={afterOpenModal} onRequestClose={closeModal} style={customStyles} contentLabel="Example Modal">
+      <Modal
+        isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
         <div className="modal-heading">
           <h2 ref={(_subtitle) => (subtitle = _subtitle)}>New Todo</h2>
           <button className="close-modal-btn" onClick={closeModal}>
@@ -161,13 +227,26 @@ const App = () => {
           <div className="priority-section">
             <label>Priority</label>
             <div>
-              <button className={"low" + (todoItem.priority === 1 ? " selected" : "")} onClick={() => setTodoItem({ ...todoItem, priority: 1 })}>
+              <button
+                className={"low" + (todoItem.priority === 1 ? " selected" : "")}
+                onClick={() => setTodoItem({ ...todoItem, priority: 1 })}
+              >
                 Low
               </button>
-              <button className={"medium" + (todoItem.priority === 2 ? " selected" : "")} onClick={() => setTodoItem({ ...todoItem, priority: 2 })}>
+              <button
+                className={
+                  "medium" + (todoItem.priority === 2 ? " selected" : "")
+                }
+                onClick={() => setTodoItem({ ...todoItem, priority: 2 })}
+              >
                 Medium
               </button>
-              <button className={"high" + (todoItem.priority === 3 ? " selected" : "")} onClick={() => setTodoItem({ ...todoItem, priority: 3 })}>
+              <button
+                className={
+                  "high" + (todoItem.priority === 3 ? " selected" : "")
+                }
+                onClick={() => setTodoItem({ ...todoItem, priority: 3 })}
+              >
                 High
               </button>
             </div>
@@ -197,7 +276,10 @@ const App = () => {
                   value={categoryInput}
                   onChange={(e) => setCategoryInput(e.target.value)}
                 />
-                <button className="btn-add-item-modal" onClick={handleAddCategory}>
+                <button
+                  className="btn-add-item-modal"
+                  onClick={handleAddCategory}
+                >
                   Add
                 </button>
               </>
@@ -223,7 +305,16 @@ const App = () => {
       {/* {isCreatingNewTodoItem && (
         
       )} */}
-      <Context.Provider value={{ categories, handleUpdateTodoItem, handleDeleteTodoItem, handleToggleIsDoneTodoItem, handleToggleExpandItem }}>
+      <Context.Provider
+        value={{
+          categories,
+          handleUpdateTodoItem,
+          handleDeleteTodoItem,
+          handleToggleIsDoneTodoItem,
+          handleToggleExpandItem,
+          handleNextPriorityItem,
+        }}
+      >
         <TodoList todoList={todoList} onToggleTodoEdit={handleToggleTodoEdit} />
       </Context.Provider>
     </>
