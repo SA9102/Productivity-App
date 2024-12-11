@@ -58,6 +58,17 @@
   resize: none;
 }
 
+.input {
+  background-color: var(--accent-grey-5);
+  outline: none;
+  border: none;
+  border-radius: 0.2rem;
+  color: var(--accent-white-2);
+  padding: 0.5rem;
+  font-size: 1rem;
+  resize: none;
+}
+
 .priority-section,
 .category-section {
   display: flex;

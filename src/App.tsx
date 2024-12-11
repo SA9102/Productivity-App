@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { useState, useMemo, createContext } from "react";
 import TodoItemType from "./types/TodoItemType";
 import "./styles/App.css";
 import TodoList from "./components/TodoList";
@@ -50,15 +50,11 @@ const App = () => {
     work: "#00ff00",
     university: "#0000ff",
   });
-  // const [categories, setCategories] = useState([
-  //   "personal",
-  //   "work",
-  //   "university",
-  // ]);
   const [isCreatingNewCategory, setIsCreatingNewCategory] = useState(false);
   const [categoryInput, setCategoryInput] = useState("");
   const [categoryColour, setCategoryColour] = useState("#ff0000");
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [filterInput, setFilterInput] = useState("");
 
   // ---------------------------------
   function openModal() {
@@ -181,6 +177,49 @@ const App = () => {
     );
   };
 
+  // Filters todo items
+  // const filterItems = () => {
+  //   console.log("Executed");
+  //   if (filterInput.trim() === "") {
+  //     return (
+  //       <TodoList todoList={todoList} onToggleTodoEdit={handleToggleTodoEdit} />
+  //     );
+  //   } else {
+  //     let todoListFiltered = todoList.filter((item: TodoItemType) => {
+  //       return item.name === filterInput.trim().toLowerCase();
+  //     });
+  //     return (
+  //       <TodoList
+  //         todoList={todoListFiltered}
+  //         onToggleTodoEdit={handleToggleTodoEdit}
+  //       />
+  //     );
+  //   }
+  // };
+
+  const filterItems = useMemo(() => {
+    console.log("Executed");
+    if (filterInput.trim() === "") {
+      return (
+        <TodoList todoList={todoList} onToggleTodoEdit={handleToggleTodoEdit} />
+      );
+    } else {
+      let todoListFiltered = todoList.filter((item: TodoItemType) => {
+        const filterTrimLower = filterInput.trim().toLowerCase();
+        return (
+          item.name.includes(filterTrimLower) ||
+          item.desc.includes(filterTrimLower)
+        );
+      });
+      return (
+        <TodoList
+          todoList={todoListFiltered}
+          onToggleTodoEdit={handleToggleTodoEdit}
+        />
+      );
+    }
+  }, [todoList, filterInput]);
+
   let completedItems = 0;
   todoList.forEach((x, i) => {
     if (x.isDone) {
@@ -200,6 +239,15 @@ const App = () => {
         <button onClick={openModal} className="btn-edit-cat">
           EDIT CATEGORIES
         </button>
+        <input
+          type="text"
+          className="input"
+          placeholder="Filter by name and description"
+          value={filterInput}
+          onChange={(e) => {
+            setFilterInput(e.target.value);
+          }}
+        />
         {completedItems > 0 && (
           <button
             onClick={handleRemoveCompletedItems}
@@ -357,7 +405,16 @@ const App = () => {
           handleNextPriorityItem,
         }}
       >
-        <TodoList todoList={todoList} onToggleTodoEdit={handleToggleTodoEdit} />
+        {/* {filterInput.trim() === "" ? (
+          <TodoList
+            todoList={todoList}
+            onToggleTodoEdit={handleToggleTodoEdit}
+          />
+        ) : (
+          <></>
+        )} */}
+        {filterItems}
+        {/* <TodoList todoList={todoList} onToggleTodoEdit={handleToggleTodoEdit} /> */}
       </Context.Provider>
     </>
   );

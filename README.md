@@ -1,10 +1,12 @@
-# Todo App
+# :zap: Todo App
 
 Stay organised and focused with this simple yet efficient todo application.
 
 This application is not yet complete and is currently being developed on.
 
-## Features
+[View the application here.](https://sa9102.github.io/Todo-App/)
+
+## :control_knobs: Features
 
 - Create todo items
 - A todo item has a name and a priority. It can also optionally have further descriptions, and can also belong to a category
@@ -12,7 +14,7 @@ This application is not yet complete and is currently being developed on.
 
 Beware that this application is not yet responsive for smaller devices, though I plan to make it so.
 
-## How To Use
+## :bulb: How To Use
 
 - To create a new todo item, click on the green 'NEW TODO' button.
 - The name is mandatory, other fields are optional.
@@ -30,7 +32,7 @@ Beware that this application is not yet responsive for smaller devices, though I
 - If a todo item belongs to a category, its category name and colour will appear to the right of its priority circle.
 - If you have at least one todo item marked as 'Completed', a red button will appear on the toolbar which will delete all completed todo items in one go.
 
-## Upcoming Features
+## :hammer_and_wrench: Upcoming Features
 
 This project is currently in development. Here are a few features I plan to add:
 
@@ -42,7 +44,7 @@ This project is currently in development. Here are a few features I plan to add:
 - Have a todo item belong in multiple categories
 - Connect to a database to permanently save data
 
-## Tech Stack
+## :desktop_computer: Tech Stack
 
 - TypeScript
 - React
@@ -53,11 +55,11 @@ React context is used to allow todo items to access the functions that manipulat
 
 I use custom CSS variables to help maintain a consistent colour scheme in the application.
 
-## Dependencies
+## :package: Dependencies
 
 - [react-modal](https://www.npmjs.com/package/react-modal)
 
-## Update Log
+## :chart_with_upwards_trend: Update Log
 
 ### 11th December 2024
 
@@ -65,6 +67,7 @@ I use custom CSS variables to help maintain a consistent colour scheme in the ap
 - Assign colours to categories
 - Have the category name and colour appear on each todo item
 - Adjust the colour of the category name (black or white) based on the background color, for better contrast
+- Filter items by text in both name and description
 
 ### 10th December 2024
 
@@ -80,6 +83,6 @@ I use custom CSS variables to help maintain a consistent colour scheme in the ap
 
 - Repository created and first commit.
 
-## Known Issues
+## :warning: Known Issues
 
-No known issues.
+- Not yet responsive for tablet and mobile devices.
