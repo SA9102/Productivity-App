@@ -12,17 +12,35 @@ This application is not yet complete and is currently being developed on.
 
 Beware that this application is not yet responsive for smaller devices, though I plan to make it so.
 
+## How To Use
+
+- To create a new todo item, click on the green 'NEW TODO' button.
+- The name is mandatory, other fields are optional.
+- Each todo item has a default priority of 'Low'. You can change it to 'Medium' or 'High'.
+- Each todo item by default belongs to no category. You can select a category that it belongs to.
+- You can create your own categories, and assign a specific colour to it.
+
+---
+
+- To right of each todo item is an 'EDIT' button and 'DELETE' button. Here, you can edit the specific details of a todo item, or delete one.
+- To toggle a todo item between 'Completed' and 'Not Completed', click on the todo item.
+- Each todo item has an arrow to the left of its name. You can click on it to expand or minimise the todo item, which will show or hide more details respectively.
+- Each todo item has a priority circle to the right of its name. It will be green if the priority is 'Low', orange is 'Medium', and red if 'High'.
+- You can click on the priority circle to quickly change the todo item's priority.
+- If a todo item belongs to a category, its category name and colour will appear to the right of its priority circle.
+- If you have at least one todo item marked as 'Completed', a red button will appear on the toolbar which will delete all completed todo items in one go.
+
 ## Upcoming Features
 
 This project is currently in development. Here are a few features I plan to add:
 
-- Create new categories
-- Sort todo items by priority
-- Order todo items by name, category etc.
+- Order todo items by name, priority, category etc.
 - Start and end date
 - Or, start date with no end date (i.e. ongoing task)
 - End date with no start date (i.e. a deadline)
 - Responsiveness for smaller devices
+- Have a todo item belong in multiple categories
+- Connect to a database to permanently save data
 
 ## Tech Stack
 
@@ -33,11 +51,20 @@ I am fairly new to TypeScript, so usage of TypeScript is limited. I have used it
 
 React context is used to allow todo items to access the functions that manipulate its own objects in state, avoiding prop drilling.
 
+I use custom CSS variables to help maintain a consistent colour scheme in the application.
+
 ## Dependencies
 
 - [react-modal](https://www.npmjs.com/package/react-modal)
 
 ## Update Log
+
+### 11th December 2024
+
+- A button for removing all completed todo items in one go
+- Assign colours to categories
+- Have the category name and colour appear on each todo item
+- Adjust the colour of the category name (black or white) based on the background color, for better contrast
 
 ### 10th December 2024
 
@@ -53,6 +80,6 @@ React context is used to allow todo items to access the functions that manipulat
 
 - Repository created and first commit.
 
-## Known Bugs
+## Known Issues
 
-- When you click 'edit' on a task item to open its edit modal, then you make some changes but then don't save them (you click 'X' or outside the modal), then when you click on 'edit' again, the modal will still have those changes. It should instead show what the current task item actually has.
+No known issues.

@@ -32,7 +32,10 @@ type props = {
 const TodoItem = ({ item }: props) => {
   let subtitle;
 
-  const [todoItem, setTodoItem] = useState<TodoItemType>({ ...item });
+  // const [todoItem, setTodoItem] = useState<TodoItemType>({ ...item });
+  // This is the to-be state of the todo item, when the user is editing the item.
+  // If these changes are saved, then the actual todoItem will contain these changes.
+  const [modalTodoItem, setModalTodoItem] = useState<TodoItemType>({ ...item });
   const {
     categories,
     handleUpdateTodoItem,
@@ -46,6 +49,7 @@ const TodoItem = ({ item }: props) => {
   // ---------------------------------
   function openModal(e) {
     e.stopPropagation();
+    setModalTodoItem(item);
     setIsOpen(true);
   }
 
@@ -58,6 +62,23 @@ const TodoItem = ({ item }: props) => {
     setIsOpen(false);
   }
   // ---------------------------------
+
+  // Used generative AI to derive a function to get the luminance of a background colour
+  const getConstrastColour = () => {
+    let bgColour = categories[item.category].replace("#", "");
+
+    // Parse the color components
+    const r = parseInt(bgColour.substring(0, 2), 16);
+    const g = parseInt(bgColour.substring(2, 4), 16);
+    const b = parseInt(bgColour.substring(4, 6), 16);
+
+    // Calculate the relative luminance
+    const luminance =
+      0.2126 * (r / 255) + 0.7152 * (g / 255) + 0.0722 * (b / 255);
+
+    // Return black for light backgrounds, white for dark backgrounds
+    return luminance > 0.5 ? "#000000" : "#FFFFFF";
+  };
   return (
     <>
       <Modal
@@ -78,14 +99,18 @@ const TodoItem = ({ item }: props) => {
             className="modal-input"
             type="text"
             placeholder="Name"
-            value={todoItem.name}
-            onChange={(e) => setTodoItem({ ...todoItem, name: e.target.value })}
+            value={modalTodoItem.name}
+            onChange={(e) =>
+              setModalTodoItem({ ...modalTodoItem, name: e.target.value })
+            }
           />
           <textarea
             className="modal-input"
             placeholder="Further description"
-            value={todoItem.desc}
-            onChange={(e) => setTodoItem({ ...todoItem, desc: e.target.value })}
+            value={modalTodoItem.desc}
+            onChange={(e) =>
+              setModalTodoItem({ ...modalTodoItem, desc: e.target.value })
+            }
           />
           <div className="priority-section">
             <label>Priority</label>
@@ -93,27 +118,33 @@ const TodoItem = ({ item }: props) => {
               <button
                 className={
                   "btn-ghost low priority-btn " +
-                  (todoItem.priority === 1 ? "selected" : "")
+                  (modalTodoItem.priority === 1 ? "selected" : "")
                 }
-                onClick={() => setTodoItem({ ...todoItem, priority: 1 })}
+                onClick={() =>
+                  setModalTodoItem({ ...modalTodoItem, priority: 1 })
+                }
               >
                 Low
               </button>
               <button
                 className={
                   "btn-ghost medium priority-btn " +
-                  (todoItem.priority === 2 ? "selected" : "")
+                  (modalTodoItem.priority === 2 ? "selected" : "")
                 }
-                onClick={() => setTodoItem({ ...todoItem, priority: 2 })}
+                onClick={() =>
+                  setModalTodoItem({ ...modalTodoItem, priority: 2 })
+                }
               >
                 Medium
               </button>
               <button
                 className={
                   "btn-ghost high priority-btn " +
-                  (todoItem.priority === 3 ? "selected" : "")
+                  (modalTodoItem.priority === 3 ? "selected" : "")
                 }
-                onClick={() => setTodoItem({ ...todoItem, priority: 3 })}
+                onClick={() =>
+                  setModalTodoItem({ ...modalTodoItem, priority: 3 })
+                }
               >
                 High
               </button>
@@ -121,17 +152,33 @@ const TodoItem = ({ item }: props) => {
           </div>
           <div className="category-section">
             <label>Category</label>
-            <select name="categories" id="categories">
-              {categories.map((category: string) => {
-                return <option value={category}>{category}</option>;
+            <select
+              style={{ color: categories[modalTodoItem.category] }}
+              name="categories"
+              id="categories"
+              defaultValue={item.category}
+              onChange={(e) =>
+                setModalTodoItem({ ...modalTodoItem, category: e.target.value })
+              }
+            >
+              <option value="">None</option>
+              {Object.keys(categories).map((categoryName: string) => {
+                return (
+                  <option
+                    style={{ color: categories[categoryName] }}
+                    value={categoryName}
+                  >
+                    {categoryName}
+                  </option>
+                );
               })}
             </select>
           </div>
 
           <button
-            className="btn-ghost btn-update-todo"
+            className="btn-update-todo"
             onClick={() => {
-              handleUpdateTodoItem(item.id, todoItem);
+              handleUpdateTodoItem(item.id, modalTodoItem);
               closeModal();
             }}
           >
@@ -173,7 +220,17 @@ const TodoItem = ({ item }: props) => {
                   : "high-priority")
               }
             />
-            {/* <div className="cat-badge">Travel</div> */}
+            {item.category !== "" && (
+              <div
+                style={{
+                  backgroundColor: categories[item.category],
+                  color: getConstrastColour(),
+                }}
+                className="cat-badge"
+              >
+                {item.category}
+              </div>
+            )}
           </div>
           <div className="buttons">
             <button className="btn-edit-todo" onClick={(e) => openModal(e)}>
@@ -201,7 +258,7 @@ export default TodoItem;
 
 {
   /* <div className="todo-inputs">
-        <input type="text" placeholder="Name" value={todoItem.name} onChange={(e) => setTodoItem({ ...todoItem, name: e.target.value })} />
+        <input type="text" placeholder="Name" value={todoItem.name} onChange={(e) => setModalTodoItem({ ...todoItem, name: e.target.value })} />
         <textarea placeholder="Further descriptions" value={todoItem.desc} onChange={(e) => setTodoItem({ ...todoItem, desc: e.target.value })} />
         <div className="priority-buttons">
           <button className={"priority-btn " + (todoItem.priority === 1 ? "selected" : "")} onClick={() => setTodoItem({ ...todoItem, priority: 1 })}>

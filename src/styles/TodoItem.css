@@ -48,6 +48,10 @@
   outline: none;
 }
 
+.btn-update-todo {
+  background-color: var(--accent-grey-1);
+}
+
 .btn-edit-todo,
 .btn-delete-todo {
   padding: 0.25rem 0.4rem;
@@ -90,7 +94,7 @@
   font-size: 0.6rem;
   font-weight: 800;
   text-transform: uppercase;
-  background-color: deeppink;
+  border: 2px solid var(--accent-grey-2);
   padding: 0.1rem 0.4rem;
   border-radius: 20rem;
 }

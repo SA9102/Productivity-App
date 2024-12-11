@@ -100,3 +100,7 @@ select {
 .btn-add-item-modal {
   background-color: var(--accent-grey-1);
 }
+
+.btn-new-category-modal {
+  background-color: var(--accent-grey-1);
+}

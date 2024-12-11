@@ -45,13 +45,19 @@ const App = () => {
   const [todoList, setTodoList] = useState<TodoItemType[]>([]);
   const [isCreatingNewTodoItem, setIsCreatingNewTodoItem] = useState(false);
   const [todoItem, setTodoItem] = useState<TodoItemType>(getEmptyTodoItem());
-  const [categories, setCategories] = useState([
-    "personal",
-    "university",
-    "work",
-  ]);
+  const [categories, setCategories] = useState({
+    personal: "#ff0000",
+    work: "#00ff00",
+    university: "#0000ff",
+  });
+  // const [categories, setCategories] = useState([
+  //   "personal",
+  //   "work",
+  //   "university",
+  // ]);
   const [isCreatingNewCategory, setIsCreatingNewCategory] = useState(false);
   const [categoryInput, setCategoryInput] = useState("");
+  const [categoryColour, setCategoryColour] = useState("#ff0000");
   const [modalIsOpen, setIsOpen] = useState(false);
 
   // ---------------------------------
@@ -65,6 +71,9 @@ const App = () => {
   }
 
   function closeModal() {
+    setTodoItem(getEmptyTodoItem());
+    setCategoryInput("");
+    setIsCreatingNewCategory(false);
     setIsOpen(false);
   }
   // ---------------------------------
@@ -123,9 +132,12 @@ const App = () => {
     );
   };
 
+  // Responsible for the creation of a new category
+  //
   const handleAddCategory = () => {
     if (categoryInput.trim() !== "") setIsCreatingNewCategory(false);
-    setCategories([...categories, categoryInput].sort());
+    setCategories({ ...categories, [categoryInput]: categoryColour });
+    setTodoItem({ ...todoItem, category: categoryInput });
     setCategoryInput("");
   };
 
@@ -256,26 +268,56 @@ const App = () => {
 
             <div className="category-buttons">
               {!isCreatingNewCategory && (
-                <select name="categories" id="categories">
-                  {categories.map((category) => {
+                <select
+                  style={{ color: categories[todoItem.category] }}
+                  name="categories"
+                  id="categories"
+                  defaultValue=""
+                  value={todoItem.category}
+                  onChange={(e) =>
+                    setTodoItem({ ...todoItem, category: e.target.value })
+                  }
+                >
+                  <option value="">None</option>
+                  {/* {categories.map((category) => {
                     return <option value={category}>{category}</option>;
+                  })} */}
+                  {Object.keys(categories).map((categoryName: string) => {
+                    return (
+                      <option
+                        style={{ color: categories[categoryName] }}
+                        value={categoryName}
+                      >
+                        {categoryName}
+                      </option>
+                    );
                   })}
                 </select>
               )}
 
-              {/* <button onClick={() => setIsCreatingNewCategory(!isCreatingNewCategory)} className="btn-ghost">
+              <button
+                onClick={() => setIsCreatingNewCategory(!isCreatingNewCategory)}
+                className="btn-new-category-modal"
+              >
                 {isCreatingNewCategory ? "Cancel" : "New"}
-              </button> */}
+              </button>
             </div>
             {isCreatingNewCategory && (
               <>
-                <input
-                  className="modal-input"
-                  type="text"
-                  placeholder="Name"
-                  value={categoryInput}
-                  onChange={(e) => setCategoryInput(e.target.value)}
-                />
+                <div>
+                  <input
+                    className="modal-input"
+                    type="text"
+                    placeholder="Name"
+                    value={categoryInput}
+                    onChange={(e) => setCategoryInput(e.target.value)}
+                  />
+                  <input
+                    type="color"
+                    value={categoryColour}
+                    onChange={(e) => setCategoryColour(e.target.value)}
+                  />
+                </div>
                 <button
                   className="btn-add-item-modal"
                   onClick={handleAddCategory}
