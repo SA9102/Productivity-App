@@ -5,14 +5,13 @@ import "../styles/TodoList.css";
 
 type props = {
   todoList: TodoItemType[];
-  onToggleTodoEdit: (arg1: string, arg2: boolean) => void;
 };
 
-const TodoList = ({ todoList, onToggleTodoEdit }: props) => {
+const TodoList = ({ todoList }: props) => {
   return (
     <div className="todo-list">
       {todoList.map((item: TodoItemType) => {
-        return <TodoItem key={item.id} item={item} onToggleTodoEdit={onToggleTodoEdit} />;
+        return <TodoItem key={item.id} item={item} />;
       })}
     </div>
   );

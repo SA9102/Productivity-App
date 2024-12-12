@@ -5,22 +5,12 @@ import TodoList from "./components/TodoList";
 import { v4 as uuidv4 } from "uuid";
 
 import Modal from "react-modal";
+import EditCategoriesButton from "./components/EditCategoriesButton";
+import { modalStyle } from "./utils";
 
 Modal.defaultStyles.overlay.backgroundColor = "rgb(0, 0, 0, 0.5)";
 
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    backgroundColor: "rgb(43, 43, 43)",
-    borderRadius: "0.2rem",
-    border: "none",
-  },
-};
+const customStyles = modalStyle;
 
 Modal.setAppElement("#root");
 
@@ -36,15 +26,16 @@ const App = () => {
       category: "",
       desc: "",
       priority: 1,
+      startDate: "",
       isEditing: false,
       isDone: false,
       isExpanded: false,
     };
   };
 
-  const [todoList, setTodoList] = useState<TodoItemType[]>([]);
-  const [isCreatingNewTodoItem, setIsCreatingNewTodoItem] = useState(false);
-  const [todoItem, setTodoItem] = useState<TodoItemType>(getEmptyTodoItem());
+  const [todoList, setTodoList] = useState<TodoItemType[]>([]); // The list to todo items that will be displayed
+  const [todoItem, setTodoItem] = useState<TodoItemType>(getEmptyTodoItem()); // The current todo item that is being created
+  // All the list of categories and their colours
   const [categories, setCategories] = useState({
     personal: "#ff0000",
     work: "#00ff00",
@@ -56,38 +47,39 @@ const App = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [filterInput, setFilterInput] = useState("");
 
-  // ---------------------------------
-  function openModal() {
+  // Modal methods
+  const openModal = () => {
     setIsOpen(true);
-  }
+  };
 
-  function afterOpenModal() {
+  const afterOpenModal = () => {
     // references are now sync'd and can be accessed.
     // subtitle.style.color = "#f00";
-  }
+  };
 
-  function closeModal() {
+  const closeModal = () => {
     setTodoItem(getEmptyTodoItem());
     setCategoryInput("");
     setIsCreatingNewCategory(false);
     setIsOpen(false);
-  }
+  };
   // ---------------------------------
 
-  const handleToggleTodoEdit = (id: string, isEditing: boolean) => {
-    let todoListCopy = [...todoList];
-    todoListCopy = todoListCopy.map((item: TodoItemType) => {
-      if (item.id === id) {
-        item.isEditing = isEditing;
-      }
-      return item;
-    });
-  };
+  // Responsible
+  // const handleToggleTodoEdit = (id: string, isEditing: boolean) => {
+  //   let todoListCopy = [...todoList];
+  //   todoListCopy = todoListCopy.map((item: TodoItemType) => {
+  //     if (item.id === id) {
+  //       item.isEditing = isEditing;
+  //     }
+  //     return item;
+  //   });
+  // };
 
+  // When 'Add' is clicked on the modal, a todo item is created.
   const handleAddTodoItem = () => {
     setTodoList([...todoList, todoItem]);
     handleResetTodoItem();
-    // }
   };
 
   const handleResetTodoItem = () => {
@@ -95,15 +87,16 @@ const App = () => {
   };
 
   // Updates a todo item
+  //
   const handleUpdateTodoItem = (id: string, todoItem: TodoItemType) => {
-    let todoListCopy = [...todoList];
-    todoListCopy = todoListCopy.map((item: TodoItemType) => {
-      if (item.id === id) {
-        return todoItem;
-      }
-      return item;
-    });
-    setTodoList(todoListCopy);
+    setTodoList(
+      todoList.map((item: TodoItemType) => {
+        if (item.id === id) {
+          return todoItem;
+        }
+        return item;
+      })
+    );
   };
 
   // Responsible for deleting an item by its id
@@ -177,32 +170,13 @@ const App = () => {
     );
   };
 
-  // Filters todo items
-  // const filterItems = () => {
-  //   console.log("Executed");
-  //   if (filterInput.trim() === "") {
-  //     return (
-  //       <TodoList todoList={todoList} onToggleTodoEdit={handleToggleTodoEdit} />
-  //     );
-  //   } else {
-  //     let todoListFiltered = todoList.filter((item: TodoItemType) => {
-  //       return item.name === filterInput.trim().toLowerCase();
-  //     });
-  //     return (
-  //       <TodoList
-  //         todoList={todoListFiltered}
-  //         onToggleTodoEdit={handleToggleTodoEdit}
-  //       />
-  //     );
-  //   }
-  // };
-
-  const filterItems = useMemo(() => {
-    console.log("Executed");
+  // Filters todo items by text; checks their name and description.
+  // We use useMemo as we want to get the updated filtered values only when
+  // the user types in the textbox.
+  //
+  const filterByText = useMemo(() => {
     if (filterInput.trim() === "") {
-      return (
-        <TodoList todoList={todoList} onToggleTodoEdit={handleToggleTodoEdit} />
-      );
+      return <TodoList todoList={todoList} />;
     } else {
       let todoListFiltered = todoList.filter((item: TodoItemType) => {
         const filterTrimLower = filterInput.trim().toLowerCase();
@@ -211,34 +185,38 @@ const App = () => {
           item.desc.includes(filterTrimLower)
         );
       });
-      return (
-        <TodoList
-          todoList={todoListFiltered}
-          onToggleTodoEdit={handleToggleTodoEdit}
-        />
-      );
+      return <TodoList todoList={todoListFiltered} />;
     }
   }, [todoList, filterInput]);
 
-  let completedItems = 0;
-  todoList.forEach((x, i) => {
-    if (x.isDone) {
-      completedItems += 1;
-    }
-  });
+  const getCompletedItems = useMemo(() => {
+    let completedItems = 0;
+    todoList.forEach((x, _) => {
+      console.log("in for loop");
+      if (x.isDone) {
+        completedItems += 1;
+      }
+    });
+    return completedItems;
+  }, [todoList]);
 
+  const getCurrentDate = () => {
+    const date = new Date();
+    const fulldate = `${date.getFullYear()}-${
+      date.getMonth() + 1
+    }-${date.getDate()}`;
+    return fulldate;
+  };
+
+  getCurrentDate();
   return (
-    // <main>
     <>
       {/* ------------------------------------ */}
       <div className="toolbar">
-        {/* <button className="btn-ghost btn-new-todo" onClick={handleAddTodoItem}> */}
         <button onClick={openModal} className="btn-new-todo">
           NEW TODO
         </button>
-        <button onClick={openModal} className="btn-edit-cat">
-          EDIT CATEGORIES
-        </button>
+        {/* <EditCategoriesButton categories={categories} /> */}
         <input
           type="text"
           className="input"
@@ -248,7 +226,7 @@ const App = () => {
             setFilterInput(e.target.value);
           }}
         />
-        {completedItems > 0 && (
+        {getCompletedItems > 0 && (
           <button
             onClick={handleRemoveCompletedItems}
             className="btn-remove-completed"
@@ -375,7 +353,7 @@ const App = () => {
               </>
             )}
           </div>
-
+          <input type="date" name="" className="input" min={getCurrentDate()} />
           <button
             className="btn-add-item-modal"
             onClick={() => {
@@ -405,15 +383,7 @@ const App = () => {
           handleNextPriorityItem,
         }}
       >
-        {/* {filterInput.trim() === "" ? (
-          <TodoList
-            todoList={todoList}
-            onToggleTodoEdit={handleToggleTodoEdit}
-          />
-        ) : (
-          <></>
-        )} */}
-        {filterItems}
+        {filterByText}
         {/* <TodoList todoList={todoList} onToggleTodoEdit={handleToggleTodoEdit} /> */}
       </Context.Provider>
     </>

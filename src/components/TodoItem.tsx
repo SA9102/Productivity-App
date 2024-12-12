@@ -26,13 +26,12 @@ Modal.setAppElement("#root");
 
 type props = {
   item: TodoItemType;
-  onToggleTodoEdit: (arg1: string, arg2: boolean) => void;
 };
 
 const TodoItem = ({ item }: props) => {
   let subtitle;
 
-  // const [todoItem, setTodoItem] = useState<TodoItemType>({ ...item });
+  const [showButtons, setShowButtons] = useState(false);
   // This is the to-be state of the todo item, when the user is editing the item.
   // If these changes are saved, then the actual todoItem will contain these changes.
   const [modalTodoItem, setModalTodoItem] = useState<TodoItemType>({ ...item });
@@ -45,7 +44,6 @@ const TodoItem = ({ item }: props) => {
     handleNextPriorityItem,
   } = useContext(Context);
   const [modalIsOpen, setIsOpen] = useState(false);
-
   // ---------------------------------
   function openModal(e) {
     e.stopPropagation();
@@ -189,6 +187,8 @@ const TodoItem = ({ item }: props) => {
       <div
         className="todo-item"
         onClick={() => handleToggleIsDoneTodoItem(item.id)}
+        onMouseEnter={() => setShowButtons(true)}
+        onMouseLeave={() => setShowButtons(false)}
       >
         <div className="main">
           <div className="arrow-and-name">
@@ -232,17 +232,19 @@ const TodoItem = ({ item }: props) => {
               </div>
             )}
           </div>
-          <div className="buttons">
-            <button className="btn-edit-todo" onClick={(e) => openModal(e)}>
-              EDIT
-            </button>
-            <button
-              className="btn-delete-todo"
-              onClick={(e) => handleDeleteTodoItem(e, item.id)}
-            >
-              DELETE
-            </button>
-          </div>
+          {showButtons && (
+            <div className="buttons">
+              <button className="btn-edit-todo" onClick={(e) => openModal(e)}>
+                EDIT
+              </button>
+              <button
+                className="btn-delete-todo"
+                onClick={(e) => handleDeleteTodoItem(e, item.id)}
+              >
+                DELETE
+              </button>
+            </div>
+          )}
         </div>
         {item.isExpanded && (
           <div className="expanded-content">

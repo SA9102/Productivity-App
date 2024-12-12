@@ -4,6 +4,7 @@ type TodoItemType = {
   category?: string;
   desc?: string;
   priority: number;
+  startDate?: string;
   isEditing: boolean;
   isDone: boolean;
   isExpanded: boolean;
