@@ -1,0 +1,131 @@
+#root {
+  background-color: var(--accent-grey-3);
+  height: 100vh;
+}
+
+.toolbar {
+  background-color: var(--accent-grey-1);
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.toolbar-left,
+.toolbar-right {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-new-todo {
+  background-color: var(--accent-green);
+}
+
+.btn-edit-cat {
+  background-color: var(--accent-purple);
+}
+
+.btn-remove-completed {
+  background-color: var(--accent-red);
+  margin-left: 2rem;
+}
+
+.btn-login {
+  background-color: var(--accent-cyan);
+}
+
+.btn-register {
+  background-color: var(--accent-orange);
+}
+
+.todo-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.close-modal-btn {
+  /* background-color: transparent; */
+  background-color: rgba(255, 114, 114, 0.329);
+  padding: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.modal-input {
+  /* background-color: var(--accent-white-2); */
+  /* background-color: transparent; */
+  background-color: var(--accent-grey-5);
+  outline: none;
+  border: none;
+  /* border-bottom: 1px solid var(--accent-white-2); */
+  border-radius: 0.2rem;
+  color: var(--accent-white-2);
+  padding: 0.5rem;
+  font-size: 1rem;
+  resize: none;
+}
+
+.input {
+  background-color: var(--accent-grey-5);
+  outline: none;
+  border: none;
+  border-radius: 0.2rem;
+  color: var(--accent-white-2);
+  padding: 0.5rem;
+  font-size: 1rem;
+  resize: none;
+}
+
+.priority-section,
+.category-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.low {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  background-color: var(--accent-grey-6);
+}
+
+.medium {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  background-color: var(--accent-grey-6);
+}
+
+.high {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  background-color: var(--accent-grey-6);
+}
+
+.selected {
+  background-color: var(--accent-grey-3);
+  color: var(--accent-white-1);
+}
+
+select {
+  background-color: var(--accent-grey-6);
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+}
+
+.btn-add-item-modal {
+  background-color: var(--accent-grey-1);
+}
+
+.btn-new-category-modal {
+  background-color: var(--accent-grey-1);
+}
