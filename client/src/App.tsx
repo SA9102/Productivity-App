@@ -10,6 +10,7 @@ import Modal from "react-modal";
 import EditCategoriesButton from "./components/EditCategoriesButton";
 import { modalStyle } from "./utils";
 import LoginPage from "./LoginPage";
+import RegisterPage from "./RegisterPage";
 
 Modal.defaultStyles.overlay.backgroundColor = "rgb(0, 0, 0, 0.5)";
 
@@ -298,7 +299,8 @@ const App = () => {
       ) : page === "login" ? (
         <LoginPage onBackToMain={handleBackToMain} />
       ) : (
-        <></>
+        <RegisterPage onBackToMain={handleBackToMain} />
+        // <></>
       )}
 
       <Modal
