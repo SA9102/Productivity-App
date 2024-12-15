@@ -69,6 +69,10 @@ I have optimised the speed of the application by making use of useMemo wherever 
 
 ## :chart_with_upwards_trend: Update Log
 
+### 15th December 2024
+
+- Added a new branch "frontend+backend" where I am working on the backend
+
 ### 12th December 2024
 
 - Tidied up code and added comments
