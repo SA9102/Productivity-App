@@ -6,6 +6,7 @@ const MongoStore = require("connect-mongo");
 const passport = require("passport");
 const generatePassword = require("./lib/passwordUtils").generatePassword;
 require("dotenv").config();
+require("./config/passport");
 
 const User = require("./models/User");
 
@@ -17,8 +18,12 @@ require("dotenv").config();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// CORS HERE
+app.use(
+  cors({
+    origin: "https://todo-app-v0td.onrender.com/",
+    credentials: true,
+  })
+);
 app.use(
   session({
     secret: "my secret",
