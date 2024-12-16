@@ -1,12 +1,12 @@
-import { useState, useMemo, createContext } from "react";
-import TodoItemType from "./types/TodoItemType";
-import "./styles/App.css";
-import TodoList from "./components/TodoList";
+import { useState, useMemo, createContext, useCallback } from "react";
+import Modal from "react-modal";
 import { v4 as uuidv4 } from "uuid";
 
-import Modal from "react-modal";
+import TodoItemType from "./types/TodoItemType";
+import TodoList from "./components/TodoList";
 import EditCategoriesButton from "./components/EditCategoriesButton";
 import { modalStyle } from "./utils";
+import "./styles/App.css";
 
 Modal.defaultStyles.overlay.backgroundColor = "rgb(0, 0, 0, 0.5)";
 
@@ -45,7 +45,10 @@ const App = () => {
   const [categoryInput, setCategoryInput] = useState("");
   const [categoryColour, setCategoryColour] = useState("#ff0000");
   const [modalIsOpen, setIsOpen] = useState(false);
+
+  // States for filters
   const [filterInput, setFilterInput] = useState("");
+  const [filterCategory, setFilterCategory] = useState("");
 
   // Modal methods
   const openModal = () => {
@@ -174,25 +177,74 @@ const App = () => {
   // We use useMemo as we want to get the updated filtered values only when
   // the user types in the textbox.
   //
-  const filterByText = useMemo(() => {
+  // const filterByText = useMemo(() => {
+  //   if (filterInput.trim() === "") {
+  //     return <TodoList todoList={todoList} />;
+  //   } else {
+  //     let todoListFiltered = todoList.filter((item: TodoItemType) => {
+  //       const filterTrimLower = filterInput.trim().toLowerCase();
+  //       return (
+  //         item.name.includes(filterTrimLower) ||
+  //         item.desc.includes(filterTrimLower)
+  //       );
+  //     });
+  //     return <TodoList todoList={todoListFiltered} />;
+  //   }
+  // }, [todoList, filterInput]);
+
+  const filterByText = (items: TodoItemType[]) => {
     if (filterInput.trim() === "") {
-      return <TodoList todoList={todoList} />;
+      return items;
     } else {
-      let todoListFiltered = todoList.filter((item: TodoItemType) => {
+      let itemsFiltered = items.filter((item: TodoItemType) => {
         const filterTrimLower = filterInput.trim().toLowerCase();
         return (
           item.name.includes(filterTrimLower) ||
           item.desc.includes(filterTrimLower)
         );
       });
-      return <TodoList todoList={todoListFiltered} />;
+      return itemsFiltered;
     }
-  }, [todoList, filterInput]);
+  };
+
+  // const filterByCategory = useCallback(
+  //   (items: TodoItemType[]) => {
+  //     console.log("FILTER BY CATEGORY EXECUTED");
+  //     if (filterCategory === "") {
+  //       return items;
+  //     } else {
+  //       let itemsFiltered = items.filter((item: TodoItemType) => {
+  //         return item.category == filterCategory;
+  //       });
+  //       return itemsFiltered;
+  //     }
+  //   },
+  //   [todoList, filterInput, filterCategory]
+  // );
+
+  // // Filters todo items by category
+  const filterByCategory = (items: TodoItemType[]) => {
+    console.log("FILTER BY CATEGORY EXECUTED");
+    if (filterCategory === "") {
+      return items;
+    } else {
+      let itemsFiltered = items.filter((item: TodoItemType) => {
+        return item.category == filterCategory;
+      });
+      return itemsFiltered;
+    }
+  };
+
+  const filterItems = useMemo(() => {
+    let filteredList = [...todoList];
+    filteredList = filterByText(filteredList);
+    filteredList = filterByCategory(filteredList);
+    return <TodoList todoList={filteredList} />;
+  }, [todoList, filterInput, filterCategory]);
 
   const getCompletedItems = useMemo(() => {
     let completedItems = 0;
     todoList.forEach((x, _) => {
-      console.log("in for loop");
       if (x.isDone) {
         completedItems += 1;
       }
@@ -226,6 +278,29 @@ const App = () => {
             setFilterInput(e.target.value);
           }}
         />
+        <select
+          style={{ color: categories[filterCategory] }}
+          name="categories"
+          id="categories"
+          defaultValue=""
+          value={filterCategory}
+          onChange={(e) => setFilterCategory(e.target.value)}
+        >
+          <option value="">None</option>
+          {/* {categories.map((category) => {
+                    return <option value={category}>{category}</option>;
+                  })} */}
+          {Object.keys(categories).map((categoryName: string) => {
+            return (
+              <option
+                style={{ color: categories[categoryName] }}
+                value={categoryName}
+              >
+                {categoryName}
+              </option>
+            );
+          })}
+        </select>
         {getCompletedItems > 0 && (
           <button
             onClick={handleRemoveCompletedItems}
@@ -383,7 +458,7 @@ const App = () => {
           handleNextPriorityItem,
         }}
       >
-        {filterByText}
+        {filterItems}
         {/* <TodoList todoList={todoList} onToggleTodoEdit={handleToggleTodoEdit} /> */}
       </Context.Provider>
     </>
