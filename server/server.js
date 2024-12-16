@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "https://todo-app-v0td.onrender.com/",
+    origin: "http://localhost:5173",
     credentials: true,
   })
 );

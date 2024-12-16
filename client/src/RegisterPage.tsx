@@ -14,7 +14,8 @@ const RegisterPage = ({ onBackToMain }: props) => {
     try {
       const res = await axios({
         method: "post",
-        url: "https://todo-app-backend-b4tv.onrender.com/registerUser",
+        url: "http://localhost:3000/registerUser",
+        // url: "https://todo-app-backend-b4tv.onrender.com/registerUser",
         data: { username, password },
       });
       console.log(res);
