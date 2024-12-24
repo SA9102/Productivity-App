@@ -6,7 +6,8 @@ import TodoItemType from "./types/TodoItemType";
 import TodoList from "./components/TodoList";
 import EditCategoriesButton from "./components/EditCategoriesButton";
 import { modalStyle } from "./utils";
-import "./styles/App.css";
+// import "./styles/App.css";
+import FilterTodoItemType from "./types/FilterTodoItemType";
 
 Modal.defaultStyles.overlay.backgroundColor = "rgb(0, 0, 0, 0.5)";
 
@@ -33,6 +34,15 @@ const App = () => {
     };
   };
 
+  const getEmptyFilterTodoItem = () => {
+    return {
+      name: "",
+      category: "",
+      desc: "",
+      priority: 0,
+    };
+  };
+
   const [todoList, setTodoList] = useState<TodoItemType[]>([]); // The list to todo items that will be displayed
   const [todoItem, setTodoItem] = useState<TodoItemType>(getEmptyTodoItem()); // The current todo item that is being created
   // All the list of categories and their colours
@@ -47,8 +57,11 @@ const App = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   // States for filters
-  const [filterInput, setFilterInput] = useState("");
-  const [filterCategory, setFilterCategory] = useState("");
+  const [filters, setFilters] = useState<FilterTodoItemType>(
+    getEmptyFilterTodoItem()
+  );
+  // const [filterInput, setFilterInput] = useState("");
+  // const [filterCategory, setFilterCategory] = useState("");
 
   // Modal methods
   const openModal = () => {
@@ -193,11 +206,11 @@ const App = () => {
   // }, [todoList, filterInput]);
 
   const filterByText = (items: TodoItemType[]) => {
-    if (filterInput.trim() === "") {
+    if (filters.name.trim() === "") {
       return items;
     } else {
       let itemsFiltered = items.filter((item: TodoItemType) => {
-        const filterTrimLower = filterInput.trim().toLowerCase();
+        const filterTrimLower = filters.name.trim().toLowerCase();
         return (
           item.name.includes(filterTrimLower) ||
           item.desc.includes(filterTrimLower)
@@ -224,12 +237,23 @@ const App = () => {
 
   // // Filters todo items by category
   const filterByCategory = (items: TodoItemType[]) => {
-    console.log("FILTER BY CATEGORY EXECUTED");
-    if (filterCategory === "") {
+    if (filters.category === "") {
       return items;
     } else {
       let itemsFiltered = items.filter((item: TodoItemType) => {
-        return item.category == filterCategory;
+        return item.category == filters.category;
+      });
+      return itemsFiltered;
+    }
+  };
+
+  // // Filters todo items by priority
+  const filterByPriority = (items: TodoItemType[]) => {
+    if (filters.priority === 0) {
+      return items;
+    } else {
+      let itemsFiltered = items.filter((item: TodoItemType) => {
+        return item.priority == filters.priority;
       });
       return itemsFiltered;
     }
@@ -239,8 +263,9 @@ const App = () => {
     let filteredList = [...todoList];
     filteredList = filterByText(filteredList);
     filteredList = filterByCategory(filteredList);
+    filteredList = filterByPriority(filteredList);
     return <TodoList todoList={filteredList} />;
-  }, [todoList, filterInput, filterCategory]);
+  }, [todoList, filters]);
 
   const getCompletedItems = useMemo(() => {
     let completedItems = 0;
@@ -273,18 +298,19 @@ const App = () => {
           type="text"
           className="input"
           placeholder="Filter by name and description"
-          value={filterInput}
+          value={filters.name}
           onChange={(e) => {
-            setFilterInput(e.target.value);
+            setFilters({ ...filters, name: e.target.value });
           }}
         />
+        <label>Category</label>
         <select
           style={{ color: categories[filterCategory] }}
           name="categories"
           id="categories"
           defaultValue=""
-          value={filterCategory}
-          onChange={(e) => setFilterCategory(e.target.value)}
+          value={filters.category}
+          onChange={(e) => setFilters({ ...filters, category: e.target.value })}
         >
           <option value="">None</option>
           {/* {categories.map((category) => {

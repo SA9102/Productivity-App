@@ -1,7 +1,7 @@
 import TodoItemType from "../types/TodoItemType";
 import TodoItem from "./TodoItem";
 
-import "../styles/TodoList.css";
+// import "../styles/TodoList.css";
 
 type props = {
   todoList: TodoItemType[];

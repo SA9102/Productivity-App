@@ -1,10 +1,10 @@
 import TodoItemType from "../types/TodoItemType";
 
-import "../styles/TodoItem.css";
+// import "../styles/TodoItem.css";
 
 import Modal from "react-modal";
 import { useState, useContext } from "react";
-import { Context } from "../App";
+import { Context } from "../AppOld";
 
 Modal.defaultStyles.overlay.backgroundColor = "rgb(0, 0, 0, 0.5)";
 
