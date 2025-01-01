@@ -1,5 +1,9 @@
 # Change Log
 
+**1st January 2025**
+
+- Added appbar at top
+
 **31st December 2024**
 
 - First commit of the new version of the application
