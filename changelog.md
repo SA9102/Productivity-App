@@ -3,7 +3,7 @@
 **31st December 2024**
 
 - First commit of the new version of the application
-- You can only add a view tasks
+- You can only add and view tasks
 
 **16th December 2024**
 

@@ -1,4 +1,4 @@
-import { Fab, Typography } from "@mui/material";
+import { Box, Fab, Typography } from "@mui/material";
 // MUI icons
 import AddIcon from "@mui/icons-material/Add";
 import { NavLink } from "react-router";
@@ -6,15 +6,14 @@ import { NavLink } from "react-router";
 import { addTask } from "./utils/paths";
 
 import useTaskStore from "./store/taskStore";
+import TopBar from "./components/TopBar";
 
 const App = () => {
   const tasks = useTaskStore((state) => state.tasks);
 
   return (
-    <>
-      <Typography variant="h3" component="h1">
-        Welcome!
-      </Typography>
+    <Box>
+      <TopBar title="My Tasks" />
       {tasks.length === 0 ? (
         <Typography>You don't have any tasks to do.</Typography>
       ) : (
@@ -29,7 +28,7 @@ const App = () => {
           <AddIcon />
         </Fab>
       </NavLink>
-    </>
+    </Box>
   );
 };
 
