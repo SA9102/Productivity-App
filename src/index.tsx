@@ -6,18 +6,28 @@ import "./default.css";
 import TaskForm from "./pages/TaskForm.tsx";
 
 // External packages
-import { BrowserRouter, Routes, Route } from "react-router";
+import { BrowserRouter, Routes, Route, Router } from "react-router";
 
 // Util imports
 import { home, addTask } from "./utils/paths";
 
+import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+
+import AppBar from "./components/AppBarWithArrow.tsx";
+
+const theme = createTheme({
+  typography: {
+    fontFamily: "PT Sans",
+  },
+});
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path={home} element={<App />} />
-        <Route path={addTask} element={<TaskForm />} />
-      </Routes>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ThemeProvider>
   </StrictMode>
 );

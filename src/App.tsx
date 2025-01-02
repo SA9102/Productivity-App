@@ -1,34 +1,51 @@
-import { Box, Fab, Typography } from "@mui/material";
+import { Box, Fab, Stack, Typography } from "@mui/material";
 // MUI icons
-import AddIcon from "@mui/icons-material/Add";
-import { NavLink } from "react-router";
 
-import { addTask } from "./utils/paths";
+// Utils
+import { PATH_FRONT, HOME, ADD_TASK } from "./utils/paths";
 
-import useTaskStore from "./store/taskStore";
-import TopBar from "./components/TopBar";
+// Custom components
+import AppBar from "./components/AppBar";
+import AppBarWithArrow from "./components/AppBarWithArrow";
+
+// Pages
+import Home from "./pages/Home";
+import TaskForm from "./pages/TaskForm";
+
+// React Router
+import { Routes, Route, NavLink, useLocation } from "react-router";
 
 const App = () => {
-  const tasks = useTaskStore((state) => state.tasks);
+  const path = useLocation().pathname;
+
+  // Gets the last path segment of the path, capitalises each word, and replaces
+  // the hyphens with a space. This is used for the title in the AppBar component.
+  const getTitle = () => {
+    const titleWordsLower = path.split("/")[2].split("-");
+    const titleWordsCapitalised = titleWordsLower.map((word) => {
+      let firstLetter = word.slice(0, 1);
+      const restOfWord = word.slice(1, word.length);
+      firstLetter = firstLetter.toUpperCase();
+      return firstLetter + restOfWord;
+    });
+
+    return titleWordsCapitalised.join(" ");
+  };
 
   return (
-    <Box>
-      <TopBar title="My Tasks" />
-      {tasks.length === 0 ? (
-        <Typography>You don't have any tasks to do.</Typography>
+    <Stack>
+      {path === "/Todo-App/" ? (
+        <AppBar title="Home" />
       ) : (
-        tasks.map((task) => <p>{task.name}</p>)
+        <AppBarWithArrow title={getTitle()} path={HOME} />
       )}
-      <NavLink to={addTask}>
-        <Fab
-          sx={{ position: "fixed", bottom: "30px", right: "30px" }}
-          color="primary"
-          aria-label="add-task"
-        >
-          <AddIcon />
-        </Fab>
-      </NavLink>
-    </Box>
+      <Box sx={{ margin: "2rem" }}>
+        <Routes>
+          <Route path={HOME} element={<Home />} />
+          <Route path={ADD_TASK} element={<TaskForm />} />
+        </Routes>
+      </Box>
+    </Stack>
   );
 };
 

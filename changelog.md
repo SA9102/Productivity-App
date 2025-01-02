@@ -1,5 +1,10 @@
 # Change Log
 
+**2nd January 2025**
+
+- Appbar is on app-level to avoid repeated code
+- Added some styles
+
 **1st January 2025**
 
 - Added appbar at top

@@ -11,41 +11,40 @@ import {
   Button,
   Typography,
   Box,
-  AppBar,
   Container,
   Toolbar,
   Alert,
 } from "@mui/material";
 
 // React Router imports
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, Router } from "react-router";
 
 // Type imports
 import taskType from "../types/taskType";
 
 // Util imports
 import emptyTask from "../utils/emptyTask";
-import { home } from "../utils/paths";
+import { HOME } from "../utils/paths";
 
 // Store imports
 import useTaskStore from "../store/taskStore";
 
 // Custom component imports
-import TopBar from "../components/TopBar";
+import Drawer from "../components/Drawer";
 
 // This component renders the input fields for a task.
 // This is used either when adding a new task, or when editing a task that exists.
-const TaskInput = () => {
+const TaskForm = () => {
   const [task, setTask] = useState<taskType>(emptyTask);
 
   const addTask = useTaskStore((state) => state.addTask);
 
   return (
     // <Container maxWidth="sm">
-    <Box>
-      <TopBar title="Add Task" />
+    <>
+      {/* <Drawer /> */}
 
-      <FormControl fullWidth>
+      <FormControl fullWidth sx={{ display: "flex", gap: "1rem" }}>
         <TextField
           variant="outlined"
           id="task-name-input"
@@ -75,18 +74,15 @@ const TaskInput = () => {
         </ButtonGroup>
         <Button
           component={Link}
-          to={home}
+          to={HOME}
           variant="contained"
           onClick={() => addTask(task)}
         >
           Add Task
         </Button>
-        <Button component={Link} to={home} variant="contained">
-          Back
-        </Button>
       </FormControl>
-    </Box>
+    </>
   );
 };
 
-export default TaskInput;
+export default TaskForm;
