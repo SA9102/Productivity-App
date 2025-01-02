@@ -1,5 +1,5 @@
 // MUI
-import { Box, Typography, Fab } from "@mui/material";
+import { Box, Typography, Fab, Card, Stack } from "@mui/material";
 
 import AddIcon from "@mui/icons-material/Add";
 
@@ -10,6 +10,7 @@ import { NavLink } from "react-router";
 import useTaskStore from "../store/taskStore";
 
 import { ADD_TASK } from "../utils/paths";
+import taskType from "../types/taskType";
 
 const Home = () => {
   const tasks = useTaskStore((state) => state.tasks);
@@ -21,7 +22,13 @@ const Home = () => {
           You don't have any tasks to do.
         </Typography>
       ) : (
-        tasks.map((task) => <p>{task.name}</p>)
+        <Stack gap="0.5rem">
+          {tasks.map((task) => (
+            <Card variant="outlined" key={task.id}>
+              {task.name}
+            </Card>
+          ))}{" "}
+        </Stack>
       )}
       <NavLink to={ADD_TASK}>
         <Fab

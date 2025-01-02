@@ -13,7 +13,12 @@ type props = {
 const AppBar = ({ title, path }: props) => {
   return (
     <AppBarMenu title={title}>
-      <IconButton aria-label="back" component={Link} to={path}>
+      <IconButton
+        aria-label="back"
+        component={Link}
+        to={path}
+        sx={{ position: "fixed", left: "0.5rem" }}
+      >
         <ArrowBackIcon />
       </IconButton>
     </AppBarMenu>

@@ -2,7 +2,7 @@
 
 Basic functionality:
 
-- [ ] Create tasks
+- [x] Create tasks
 - [ ] Update tasks
 - [ ] Delete tasks
 - [ ] Check tasks off as completed

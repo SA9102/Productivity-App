@@ -3,7 +3,7 @@
 **2nd January 2025**
 
 - Appbar is on app-level to avoid repeated code
-- Added some styles
+- Style and theme changes
 
 **1st January 2025**
 

@@ -43,7 +43,9 @@ const TaskForm = () => {
     // <Container maxWidth="sm">
     <>
       {/* <Drawer /> */}
-
+      <Typography variant="h4" component="h1" textAlign="center" mb={3}>
+        Add Task
+      </Typography>
       <FormControl fullWidth sx={{ display: "flex", gap: "1rem" }}>
         <TextField
           variant="outlined"
@@ -77,8 +79,9 @@ const TaskForm = () => {
           to={HOME}
           variant="contained"
           onClick={() => addTask(task)}
+          color="secondary"
         >
-          Add Task
+          Create Task
         </Button>
       </FormControl>
     </>
