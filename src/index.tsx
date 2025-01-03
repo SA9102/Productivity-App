@@ -15,7 +15,7 @@ const theme = createTheme({
   shape: {
     borderRadius: 10,
   },
-  shadows: ["none"],
+  // shadows: ["none"],
   palette: {
     primary: {
       main: "#4DB6AC",

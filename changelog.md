@@ -1,5 +1,10 @@
 # Change Log
 
+**3rd January 2025**
+
+- Added a menu popup when you click on the 'three dots'. Logic extracted to custom hook.
+- No functionality to menu popup yet.
+
 **2nd January 2025**
 
 - Appbar is on app-level to avoid repeated code
