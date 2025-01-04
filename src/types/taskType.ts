@@ -5,6 +5,7 @@ type taskType = {
   name: string;
   category: string;
   description: string;
+  isComplete: false;
 };
 
 export default taskType;

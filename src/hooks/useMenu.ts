@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useMoreMenu = () => {
+const useMenu = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -15,4 +15,4 @@ const useMoreMenu = () => {
   return { anchorEl, open, handleClick, handleClose };
 };
 
-export default useMoreMenu;
+export default useMenu;

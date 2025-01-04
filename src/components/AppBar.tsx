@@ -8,15 +8,15 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 // Custom hooks
-import useMoreMenu from "../hooks/useMoreMenu";
+import useMenu from "../hooks/useMenu";
+import MoreOptionsMenu from "./MoreOptionsMenu";
 
 type props = {
   title: string;
@@ -25,8 +25,10 @@ type props = {
 
 const AppBarMenu = ({ title, children }: props) => {
   // Sets up the logic for using the Menu component from MUI
+
   const path = useLocation().pathname;
-  const { anchorEl, open, handleClick, handleClose } = useMoreMenu();
+  const navigate = useNavigate();
+  const { anchorEl, open, handleClick, handleClose } = useMenu();
 
   const getLastPath = () => {
     const pathSplit = path.split("/");
@@ -34,6 +36,7 @@ const AppBarMenu = ({ title, children }: props) => {
     console.log(last);
     return last;
   };
+
   // console.log(path);
   return (
     <>
@@ -73,7 +76,8 @@ const AppBarMenu = ({ title, children }: props) => {
         {getLastPath() !== "add-task" && (
           <MenuItem
             onClick={() => {
-              handleClose();
+              navigate("/Todo-App/add-task");
+              // handleClose();
             }}
           >
             Add Task
