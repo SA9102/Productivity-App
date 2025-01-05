@@ -13,7 +13,7 @@ import Home from "./pages/Home";
 import TaskForm from "./pages/TaskForm";
 
 // React Router
-import { Routes, Route, NavLink, useLocation } from "react-router";
+import { Routes, Route, useLocation } from "react-router";
 
 const App = () => {
   const path = useLocation().pathname;
@@ -34,7 +34,7 @@ const App = () => {
 
   return (
     <Stack>
-      {path === "/Todo-App/" ? (
+      {path === "/Todo-App" ? (
         <AppBar title="Home" />
       ) : (
         <AppBarWithArrow title={getTitle()} path={HOME} />

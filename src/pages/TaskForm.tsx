@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 
 // React Router imports
-import { Link, NavLink, Router } from "react-router";
+import { Link, NavLink, Router, useNavigate } from "react-router";
 
 // Type imports
 import taskType from "../types/taskType";
@@ -38,6 +38,7 @@ const TaskForm = () => {
   const [task, setTask] = useState<taskType>(emptyTask);
 
   const addTask = useTaskStore((state) => state.addTask);
+  const navigate = useNavigate();
 
   return (
     // <Container maxWidth="sm">

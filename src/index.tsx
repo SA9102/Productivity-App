@@ -4,9 +4,10 @@ import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 
 // External packages
-import { BrowserRouter } from "react-router";
+import { BrowserRouter, MemoryRouter } from "react-router";
 
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import TaskForm from "./pages/TaskForm.tsx";
 
 const theme = createTheme({
   typography: {
@@ -34,6 +35,7 @@ createRoot(document.getElementById("root")!).render(
       <CssBaseline />
       <BrowserRouter>
         <App />
+        {/* <TaskForm /> */}
       </BrowserRouter>
     </ThemeProvider>
   </StrictMode>

@@ -32,7 +32,7 @@ Here are a few key points to note about this project:
 - I have written some tests for each component. Instead of testing for every single detail, they just test the features. -->
 
 - I am using the mobile-first design approach - I am first building for mobile devices, and then will scale the design up to be responsive for bigger screens.
-- I am using Vitest and React Testing Library, I am testing for the main features (see requirements.md) of the app, and for proper integration between components.
+- I am using Vitest and React Testing Library, I am testing for the main features (see requirements.md) of the app, and for proper integration between components. This is my first React application where I am including tests. I am learning how to use React Testing Library to test components.
 - I decided to use some global statement management, as this would be good to store tasks, and would make it easier to scale up the application. For this, I learned how to use Zustand.
 - My first project when I am making use of custom hooks to extract repeated logic, which not only means being able to re-use logic but also separates the logic from the views.
 

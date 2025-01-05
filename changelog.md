@@ -1,9 +1,17 @@
 # Change Log
 
+**5th January 2025**
+
+- Added a basic test for the TaskForm page. Will expand on this.
+
+**4th January 2025**
+
+- Only 'Add Task' works. Takes you to the 'Add Task' page - same as clicking on the floating action button.
+
 **3rd January 2025**
 
 - Added a menu popup when you click on the 'three dots'. Logic extracted to custom hook.
-- No functionality to menu popup yet.
+- Not functional yet.
 
 **2nd January 2025**
 
