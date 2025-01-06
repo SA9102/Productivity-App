@@ -14,6 +14,7 @@ import taskType from "../types/taskType";
 
 const Home = () => {
   const tasks = useTaskStore((state) => state.tasks);
+  const toggleComplete = useTaskStore((state) => state.toggleComplete);
 
   return (
     <Box>
@@ -24,8 +25,18 @@ const Home = () => {
       ) : (
         <Stack gap="0.5rem">
           {tasks.map((task) => (
-            <Card variant="outlined" key={task.id}>
-              {task.name}
+            <Card
+              variant="outlined"
+              key={task.id}
+              onClick={() => toggleComplete(task.id)}
+            >
+              {task.isComplete ? (
+                <Typography sx={{ textDecoration: "line-through" }}>
+                  {task.name}
+                </Typography>
+              ) : (
+                <Typography>{task.name}</Typography>
+              )}
             </Card>
           ))}{" "}
         </Stack>

@@ -86,6 +86,7 @@ const AppBarMenu = ({ title, children }: props) => {
 
         <MenuItem onClick={handleClose}>Categories</MenuItem>
         <MenuItem onClick={handleClose}>Download</MenuItem>
+        <MenuItem onClick={handleClose}>Remove Completed</MenuItem>
       </Menu>
     </>
   );

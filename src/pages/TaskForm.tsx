@@ -14,6 +14,7 @@ import {
   Container,
   Toolbar,
   Alert,
+  InputLabel,
 } from "@mui/material";
 
 // React Router imports
@@ -23,7 +24,7 @@ import { Link, NavLink, Router, useNavigate } from "react-router";
 import taskType from "../types/taskType";
 
 // Util imports
-import emptyTask from "../utils/emptyTask";
+import getEmptyTask from "../utils/getEmptyTask";
 import { HOME } from "../utils/paths";
 
 // Store imports
@@ -31,14 +32,17 @@ import useTaskStore from "../store/taskStore";
 
 // Custom component imports
 import Drawer from "../components/Drawer";
+import { dark } from "@mui/material/styles/createPalette";
 
 // This component renders the input fields for a task.
 // This is used either when adding a new task, or when editing a task that exists.
 const TaskForm = () => {
-  const [task, setTask] = useState<taskType>(emptyTask);
+  const [task, setTask] = useState<taskType>(getEmptyTask());
 
   const addTask = useTaskStore((state) => state.addTask);
   const navigate = useNavigate();
+
+  const [priority, setPriority] = useState<1 | 2 | 3>(1);
 
   return (
     // <Container maxWidth="sm">
@@ -67,13 +71,29 @@ const TaskForm = () => {
           multiline
           rows={8}
         />
-        <Select label="Category">
+        <TextField select label="Category" defaultValue="None">
+          <MenuItem value="none">None</MenuItem>
           <MenuItem value="travel">Travel</MenuItem>
-        </Select>
+        </TextField>
         <ButtonGroup variant="contained">
-          <Button>Low</Button>
-          <Button>Medium</Button>
-          <Button>High</Button>
+          <Button
+            onClick={() => setPriority(1)}
+            color={priority === 1 ? "secondary" : "primary"}
+          >
+            Low
+          </Button>
+          <Button
+            onClick={() => setPriority(2)}
+            color={priority === 2 ? "secondary" : "primary"}
+          >
+            Medium
+          </Button>
+          <Button
+            onClick={() => setPriority(3)}
+            color={priority === 3 ? "secondary" : "primary"}
+          >
+            High
+          </Button>
         </ButtonGroup>
         <Button
           component={Link}

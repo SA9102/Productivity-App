@@ -11,6 +11,7 @@ type state = {
 type actions = {
   addTask: (task: taskType) => void;
   removeTask: (taskId: string) => void;
+  toggleComplete: (taskId: string) => void;
 };
 
 const useTaskStore = create<state & actions>()((set) => ({
@@ -22,6 +23,15 @@ const useTaskStore = create<state & actions>()((set) => ({
   removeTask: (taskId: string) =>
     set((state) => ({
       tasks: state.tasks.filter((task: taskType) => task.id !== taskId),
+    })),
+  toggleComplete: (taskId: string) =>
+    set((state) => ({
+      tasks: state.tasks.map((task: taskType) => {
+        if (task.id === taskId) {
+          task.isComplete = !task.isComplete;
+        }
+        return task;
+      }),
     })),
 }));
 

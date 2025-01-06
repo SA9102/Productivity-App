@@ -36,6 +36,7 @@ const MoreOptionsMenu = () => {
 
       <MenuItem onClick={handleClose}>Categories</MenuItem>
       <MenuItem onClick={handleClose}>Download</MenuItem>
+      <MenuItem onClick={handleClose}>Remove Completed</MenuItem>
     </Menu>
   );
 };
