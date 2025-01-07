@@ -12,6 +12,7 @@ type actions = {
   addTask: (task: taskType) => void;
   removeTask: (taskId: string) => void;
   toggleComplete: (taskId: string) => void;
+  removeCompletedTasks: () => void;
 };
 
 const useTaskStore = create<state & actions>()((set) => ({
@@ -32,6 +33,10 @@ const useTaskStore = create<state & actions>()((set) => ({
         }
         return task;
       }),
+    })),
+  removeCompletedTasks: () =>
+    set((state) => ({
+      tasks: state.tasks.filter((task: taskType) => !task.isComplete),
     })),
 }));
 

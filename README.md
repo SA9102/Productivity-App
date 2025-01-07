@@ -21,6 +21,7 @@ This is the master branch which contains the refactored application. To view the
 ## Features
 
 - Add tasks
+- Remove all completed tasks at once
 
 ## Development
 

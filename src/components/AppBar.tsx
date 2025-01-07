@@ -18,6 +18,8 @@ import { useLocation, useNavigate } from "react-router";
 import useMenu from "../hooks/useMenu";
 import MoreOptionsMenu from "./MoreOptionsMenu";
 
+import useTaskStore from "../store/taskStore";
+
 type props = {
   title: string;
   children?: ReactNode;
@@ -25,6 +27,10 @@ type props = {
 
 const AppBarMenu = ({ title, children }: props) => {
   // Sets up the logic for using the Menu component from MUI
+
+  const removeCompletedTasks = useTaskStore(
+    (state) => state.removeCompletedTasks
+  );
 
   const path = useLocation().pathname;
   const navigate = useNavigate();
@@ -86,7 +92,14 @@ const AppBarMenu = ({ title, children }: props) => {
 
         <MenuItem onClick={handleClose}>Categories</MenuItem>
         <MenuItem onClick={handleClose}>Download</MenuItem>
-        <MenuItem onClick={handleClose}>Remove Completed</MenuItem>
+        <MenuItem
+          onClick={() => {
+            handleClose();
+            removeCompletedTasks();
+          }}
+        >
+          Remove Completed
+        </MenuItem>
       </Menu>
     </>
   );
