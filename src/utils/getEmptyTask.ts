@@ -1,12 +1,14 @@
 import { v4 as uuidv4 } from "uuid";
 import taskType from "../types/taskType";
 
+// Return an empty, fresh task of type taskType.
 const getEmptyTask = (): taskType => {
   return {
     id: uuidv4(),
     name: "",
     category: "",
     description: "",
+    priority: 1,
     isComplete: false,
   };
 };

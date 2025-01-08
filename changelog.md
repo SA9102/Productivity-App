@@ -1,5 +1,19 @@
 # Change Log
 
+**8th January 2025**
+
+- Code refactors to increase maintainability and reusability
+
+**7th January 2025**
+
+- Can remove all completed tasks at once.
+
+**6th January 2025**
+
+- Tasks have unique ids.
+- Click on task item to mark it as complete. Click it again to mark it as incomplete.
+- Added some tests for Home.tsx.
+
 **5th January 2025**
 
 - Added a basic test for the TaskForm page. Will expand on this.

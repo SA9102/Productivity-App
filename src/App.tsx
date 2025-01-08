@@ -2,15 +2,19 @@ import { Box, Fab, Stack, Typography } from "@mui/material";
 // MUI icons
 
 // Utils
-import { PATH_FRONT, HOME, ADD_TASK } from "./utils/paths";
+import {
+  HOME_ROUTE,
+  ADD_TASK_ROUTE,
+  EDIT_TASK_ROUTE,
+} from "./utils/fullRoutes";
 
 // Custom components
 import AppBar from "./components/AppBar";
 import AppBarWithArrow from "./components/AppBarWithArrow";
 
 // Pages
-import Home from "./pages/Home";
-import TaskForm from "./pages/TaskForm";
+import HomePage from "./pages/HomePage";
+import TaskEntryPage from "./pages/TaskEntryPage";
 
 // React Router
 import { Routes, Route, useLocation } from "react-router";
@@ -37,12 +41,16 @@ const App = () => {
       {path === "/Todo-App" ? (
         <AppBar title="Home" />
       ) : (
-        <AppBarWithArrow title={getTitle()} path={HOME} />
+        <AppBarWithArrow title={getTitle()} path={HOME_ROUTE} />
       )}
       <Box sx={{ margin: "2rem" }}>
         <Routes>
-          <Route path={HOME} element={<Home />} />
-          <Route path={ADD_TASK} element={<TaskForm />} />
+          <Route path={HOME_ROUTE} element={<HomePage />} />
+          <Route path={ADD_TASK_ROUTE} element={<TaskEntryPage />} />
+          <Route
+            path={EDIT_TASK_ROUTE + "/:taskId"}
+            element={<TaskEntryPage />}
+          />
         </Routes>
       </Box>
     </Stack>

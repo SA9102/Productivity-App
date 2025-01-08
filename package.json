@@ -23,6 +23,7 @@
     "react-dom": "^18.3.1",
     "react-modal": "^3.16.1",
     "react-router": "^7.1.1",
+    "use-long-press": "^3.2.0",
     "uuid": "^11.0.2",
     "zustand": "^5.0.2"
   },

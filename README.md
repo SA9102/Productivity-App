@@ -25,16 +25,16 @@ This is the master branch which contains the refactored application. To view the
 
 ## Development
 
-This application will be my most complex one so far, not only in terms of the scope, but also the tech stack and good development practices that I will use. This project is an opportunity to not only consolidate what I have learnt on my journey of learning, but also to really level up my software development skills and knowledge.
+This application will be my most complex one so far, not only in terms of the scope, but also the tech stack and good development practices that I will use, such as adhering to the single responsibility prinicple, and separating the UI from the logic. This project is an opportunity to not only consolidate what I have learnt on my journey of learning, but also to really level up my software development skills and knowledge.
 
 Here are a few key points to note about this project:
 
 <!-- - I have been quite serious about the maintainability and reusability of the code. For this, I have written many custom hooks (something I haven't done before in any project) and higher order components (also something I haven't done before). I have taken care to extract reused logic into its own separate unit which can be extended and reused anytime.
 - I have written some tests for each component. Instead of testing for every single detail, they just test the features. -->
 
-- I am using the mobile-first design approach - I am first building for mobile devices, and then will scale the design up to be responsive for bigger screens.
+- I am using the mobile-first design approach - I am first building for mobile devices, and then will scale up the design to be responsive for bigger screens.
 - I am using Vitest and React Testing Library, I am testing for the main features (see requirements.md) of the app, and for proper integration between components. This is my first React application where I am including tests. I am learning how to use React Testing Library to test components.
-- I decided to use some global statement management, as this would be good to store tasks, and would make it easier to scale up the application. For this, I learned how to use Zustand.
+- I decided to use some global statement management, as this would be good to store tasks, and would make it easier to scale up the application. For this, I am learning how to use Zustand.
 - My first project when I am making use of custom hooks to extract repeated logic, which not only means being able to re-use logic but also separates the logic from the views.
 
 <!-- # :zap: Todo App

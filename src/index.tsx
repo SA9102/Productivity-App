@@ -7,7 +7,7 @@ import App from "./App.tsx";
 import { BrowserRouter, MemoryRouter } from "react-router";
 
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
-import TaskForm from "./pages/TaskForm.tsx";
+import TaskForm from "./pages/TaskEntryPage.tsx";
 
 const theme = createTheme({
   typography: {

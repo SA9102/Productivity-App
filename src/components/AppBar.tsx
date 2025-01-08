@@ -19,6 +19,8 @@ import useMenu from "../hooks/useMenu";
 import MoreOptionsMenu from "./MoreOptionsMenu";
 
 import useTaskStore from "../store/taskStore";
+import { ADD_TASK_ROUTE } from "../utils/fullRoutes";
+import getLastRouteSegment from "../utils/getLastRouteSegment";
 
 type props = {
   title: string;
@@ -36,14 +38,6 @@ const AppBarMenu = ({ title, children }: props) => {
   const navigate = useNavigate();
   const { anchorEl, open, handleClick, handleClose } = useMenu();
 
-  const getLastPath = () => {
-    const pathSplit = path.split("/");
-    const last = pathSplit[pathSplit.length - 1];
-    console.log(last);
-    return last;
-  };
-
-  // console.log(path);
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
@@ -79,10 +73,10 @@ const AppBarMenu = ({ title, children }: props) => {
         onClose={handleClose}
         MenuListProps={{ "aria-labelledby": "more-button" }}
       >
-        {getLastPath() !== "add-task" && (
+        {getLastRouteSegment(path) !== "add-task" && (
           <MenuItem
             onClick={() => {
-              navigate("/Todo-App/add-task");
+              navigate(ADD_TASK_ROUTE);
               // handleClose();
             }}
           >

@@ -1,54 +1,71 @@
 // React hook imports
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // MUI imports
 import {
   FormControl,
   TextField,
-  Select,
   MenuItem,
   ButtonGroup,
   Button,
   Typography,
-  Box,
-  Container,
-  Toolbar,
-  Alert,
-  InputLabel,
 } from "@mui/material";
 
 // React Router imports
-import { Link, NavLink, Router, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 
 // Type imports
 import taskType from "../types/taskType";
 
 // Util imports
 import getEmptyTask from "../utils/getEmptyTask";
-import { HOME } from "../utils/paths";
+import { HOME_ROUTE } from "../utils/fullRoutes";
 
 // Store imports
 import useTaskStore from "../store/taskStore";
-
-// Custom component imports
-import Drawer from "../components/Drawer";
-import { dark } from "@mui/material/styles/createPalette";
+import getLastRouteSegment from "../utils/getLastRouteSegment";
 
 // This component renders the input fields for a task.
 // This is used either when adding a new task, or when editing a task that exists.
+// The optional prop 'task' is an object of type 'taskType'. If a task is passed in,
+// it will render a page to edit a task. But if 'task' is null, it will render a page
+// to create a new task.
 const TaskForm = () => {
-  const [task, setTask] = useState<taskType>(getEmptyTask());
+  const route = useLocation().pathname;
+
+  // const [taskInput, setTaskInput] = useState<taskType>(
+  //   task === undefined ? getEmptyTask() : task
+  // );
+
+  const [taskInput, setTaskInput] = useState<taskType>(getEmptyTask());
 
   const addTask = useTaskStore((state) => state.addTask);
   const navigate = useNavigate();
 
   const [priority, setPriority] = useState<1 | 2 | 3>(1);
 
+  /*
+  When the page is rendered the first time, we get the route.
+  If the route is /edit-task/:taskId, we get the task based on
+  :taskId and set it to 'task' state so that it can be updated.
+  Otherwise (when the route is /add-task), we set the 'task'
+  state to be an empty task so that a new task can be created.
+  */
+  useEffect(() => {
+    const lastRouteSegment = getLastRouteSegment(route);
+    if (lastRouteSegment !== "add-task") {
+      const tasks = useTaskStore.getState().tasks;
+      const task = tasks.find((task) => task.id === lastRouteSegment);
+      setTaskInput(task!);
+    }
+  }, []);
+
   return (
     // <Container maxWidth="sm">
     <>
       {/* <Drawer /> */}
       <Typography variant="h4" component="h1" textAlign="center" mb={3}>
+        {/* {task === undefined ? "Add Task" : "Edit Task"} */}
         Add Task
       </Typography>
       <FormControl fullWidth sx={{ display: "flex", gap: "1rem" }}>
@@ -57,8 +74,8 @@ const TaskForm = () => {
           id="task-name-input"
           label="Name"
           aria-describedby="enter-task-name-here"
-          value={task.name}
-          onChange={(e) => setTask({ ...task, name: e.target.value })}
+          value={taskInput.name}
+          onChange={(e) => setTaskInput({ ...taskInput, name: e.target.value })}
           required
         />
         <TextField
@@ -66,8 +83,10 @@ const TaskForm = () => {
           id="task-description-input"
           label="Description"
           aria-describedby="enter-task-description-here"
-          value={task.description}
-          onChange={(e) => setTask({ ...task, description: e.target.value })}
+          value={taskInput.description}
+          onChange={(e) =>
+            setTaskInput({ ...taskInput, description: e.target.value })
+          }
           multiline
           rows={8}
         />
@@ -97,9 +116,9 @@ const TaskForm = () => {
         </ButtonGroup>
         <Button
           component={Link}
-          to={HOME}
+          to={HOME_ROUTE}
           variant="contained"
-          onClick={() => addTask(task)}
+          onClick={() => addTask(taskInput)}
           color="secondary"
         >
           Create Task
