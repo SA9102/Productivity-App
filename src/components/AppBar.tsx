@@ -1,26 +1,13 @@
 // MUI components
-import {
-  AppBar as MUIAppBar,
-  IconButton,
-  Toolbar,
-  Typography,
-  Box,
-  Menu,
-  MenuItem,
-} from "@mui/material";
-import { ReactNode } from "react";
+import { AppBar as MUIAppBar, Toolbar, Typography, Box } from "@mui/material";
+import { ReactNode, useMemo } from "react";
 
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-
-import { useLocation, useNavigate } from "react-router";
-
-// Custom hooks
-import useMenu from "../hooks/useMenu";
-import MoreOptionsMenu from "./MoreOptionsMenu";
+import { useNavigate } from "react-router";
 
 import useTaskStore from "../store/taskStore";
 import { ADD_TASK_ROUTE } from "../utils/fullRoutes";
-import getLastRouteSegment from "../utils/getLastRouteSegment";
+
+import Menu from "./Menu";
 
 type props = {
   title: string;
@@ -34,9 +21,17 @@ const AppBarMenu = ({ title, children }: props) => {
     (state) => state.removeCompletedTasks
   );
 
-  const path = useLocation().pathname;
   const navigate = useNavigate();
-  const { anchorEl, open, handleClick, handleClose } = useMenu();
+
+  const menuItems = useMemo(
+    () => [
+      { name: "Add Task", onClick: () => navigate(ADD_TASK_ROUTE) },
+      { name: "Categories", onClick: () => {} },
+      { name: "Download", onClick: () => {} },
+      { name: "Remove Completed", onClick: () => removeCompletedTasks() },
+    ],
+    [navigate]
+  );
 
   return (
     <>
@@ -53,48 +48,10 @@ const AppBarMenu = ({ title, children }: props) => {
             >
               {title}
             </Typography>
-            <IconButton
-              id="more-button"
-              aria-label="more"
-              sx={{ position: "fixed", right: "0.5rem" }}
-              aria-control={open ? "more" : undefined}
-              aria-haspopup={true}
-              aria-expanded={open ? true : undefined}
-              onClick={handleClick}
-            >
-              <MoreVertIcon />
-            </IconButton>
+            <Menu menuItems={menuItems} />
           </Toolbar>
         </MUIAppBar>
       </Box>
-      <Menu
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{ "aria-labelledby": "more-button" }}
-      >
-        {getLastRouteSegment(path) !== "add-task" && (
-          <MenuItem
-            onClick={() => {
-              navigate(ADD_TASK_ROUTE);
-              // handleClose();
-            }}
-          >
-            Add Task
-          </MenuItem>
-        )}
-
-        <MenuItem onClick={handleClose}>Categories</MenuItem>
-        <MenuItem onClick={handleClose}>Download</MenuItem>
-        <MenuItem
-          onClick={() => {
-            handleClose();
-            removeCompletedTasks();
-          }}
-        >
-          Remove Completed
-        </MenuItem>
-      </Menu>
     </>
   );
 };

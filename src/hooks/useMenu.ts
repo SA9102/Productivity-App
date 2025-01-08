@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+// Logic for the MUI Menu component
 const useMenu = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);

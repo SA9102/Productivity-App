@@ -25,23 +25,16 @@ import { HOME_ROUTE } from "../utils/fullRoutes";
 import useTaskStore from "../store/taskStore";
 import getLastRouteSegment from "../utils/getLastRouteSegment";
 
-// This component renders the input fields for a task.
+// This page renders the input fields for a task.
 // This is used either when adding a new task, or when editing a task that exists.
 // The optional prop 'task' is an object of type 'taskType'. If a task is passed in,
 // it will render a page to edit a task. But if 'task' is null, it will render a page
 // to create a new task.
 const TaskForm = () => {
   const route = useLocation().pathname;
-
-  // const [taskInput, setTaskInput] = useState<taskType>(
-  //   task === undefined ? getEmptyTask() : task
-  // );
-
   const [taskInput, setTaskInput] = useState<taskType>(getEmptyTask());
-
   const addTask = useTaskStore((state) => state.addTask);
   const navigate = useNavigate();
-
   const [priority, setPriority] = useState<1 | 2 | 3>(1);
 
   /*
@@ -61,9 +54,7 @@ const TaskForm = () => {
   }, []);
 
   return (
-    // <Container maxWidth="sm">
     <>
-      {/* <Drawer /> */}
       <Typography variant="h4" component="h1" textAlign="center" mb={3}>
         {/* {task === undefined ? "Add Task" : "Edit Task"} */}
         Add Task
