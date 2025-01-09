@@ -3,9 +3,8 @@
 **Main Functionality**
 
 - [x] Create tasks
-- [ ] Edit tasks
-- [ ] Delete tasks
-- [ ] Remove completed tasks <!-- Removing a task doesn't mean deleting. -->
+- [x] Edit tasks
+- [x] Delete tasks
 - [x] Check tasks off as completed
 - [ ] Expand task to see more details
 - [ ] Minimise task to see less details

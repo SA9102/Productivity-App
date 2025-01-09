@@ -37,6 +37,14 @@ Here are a few key points to note about this project:
 - I decided to use some global statement management, as this would be good to store tasks, and would make it easier to scale up the application. For this, I am learning how to use Zustand.
 - My first project when I am making use of custom hooks to extract repeated logic, which not only means being able to re-use logic but also separates the logic from the views.
 
+## Requirements
+
+See [requirements.mid](requirements.md) for more information about the planned, and already-implemented, features.
+
+## Change Log
+
+See [changelog.md](changelog.md) for more information about the changes on each day there was a commit.
+
 <!-- # :zap: Todo App
 
 Stay organised and focused with this simple yet efficient todo application.

@@ -1,6 +1,6 @@
 type menuItemType = {
   name: string;
-  onClick: () => void;
+  onClick: (arg?: string) => void;
 };
 
 export default menuItemType;

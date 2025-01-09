@@ -34,8 +34,11 @@ const TaskForm = () => {
   const route = useLocation().pathname;
   const [taskInput, setTaskInput] = useState<taskType>(getEmptyTask());
   const addTask = useTaskStore((state) => state.addTask);
+  const updateTask = useTaskStore((state) => state.updateTask);
   const navigate = useNavigate();
   const [priority, setPriority] = useState<1 | 2 | 3>(1);
+
+  const [isAddingTask, setIsAddingTask] = useState(true);
 
   /*
   When the page is rendered the first time, we get the route.
@@ -47,6 +50,7 @@ const TaskForm = () => {
   useEffect(() => {
     const lastRouteSegment = getLastRouteSegment(route);
     if (lastRouteSegment !== "add-task") {
+      setIsAddingTask(false);
       const tasks = useTaskStore.getState().tasks;
       const task = tasks.find((task) => task.id === lastRouteSegment);
       setTaskInput(task!);
@@ -56,8 +60,7 @@ const TaskForm = () => {
   return (
     <>
       <Typography variant="h4" component="h1" textAlign="center" mb={3}>
-        {/* {task === undefined ? "Add Task" : "Edit Task"} */}
-        Add Task
+        {getLastRouteSegment(route) === "add-task" ? "Add Task" : "Edit Task"}
       </Typography>
       <FormControl fullWidth sx={{ display: "flex", gap: "1rem" }}>
         <TextField
@@ -105,15 +108,27 @@ const TaskForm = () => {
             High
           </Button>
         </ButtonGroup>
-        <Button
-          component={Link}
-          to={HOME_ROUTE}
-          variant="contained"
-          onClick={() => addTask(taskInput)}
-          color="secondary"
-        >
-          Create Task
-        </Button>
+        {isAddingTask ? (
+          <Button
+            component={Link}
+            to={HOME_ROUTE}
+            variant="contained"
+            onClick={() => addTask(taskInput)}
+            color="secondary"
+          >
+            Create Task
+          </Button>
+        ) : (
+          <Button
+            component={Link}
+            to={HOME_ROUTE}
+            variant="contained"
+            onClick={() => updateTask(taskInput)}
+            color="secondary"
+          >
+            Update Task
+          </Button>
+        )}
       </FormControl>
     </>
   );

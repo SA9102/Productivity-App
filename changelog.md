@@ -1,5 +1,9 @@
 # Change Log
 
+**9th January 2025**
+
+- Edit and delete tasks
+
 **8th January 2025**
 
 - Code refactors to increase maintainability and reusability

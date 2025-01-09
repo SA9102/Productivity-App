@@ -10,6 +10,8 @@ import { useNavigate } from "react-router";
 import { EDIT_TASK_ROUTE } from "../utils/fullRoutes";
 // Other external packages
 import { useLongPress } from "use-long-press";
+import Menu from "./Menu";
+import { useMemo } from "react";
 
 type props = {
   task: taskType;
@@ -18,12 +20,31 @@ type props = {
 // Renders a 'task item' to the screen
 const TaskItem = ({ task }: props) => {
   const toggleComplete = useTaskStore((state) => state.toggleComplete);
+  const removeTask = useTaskStore((state) => state.removeTask);
   const navigate = useNavigate();
   const bind = useLongPress((taskId) => {
     console.log("USE LONG PRESS");
     console.log(taskId);
     navigate(`${EDIT_TASK_ROUTE}/${taskId}`);
   });
+
+  const menuItems = useMemo(
+    () => [
+      {
+        name: "Edit",
+        onClick: () => {
+          navigate(`${EDIT_TASK_ROUTE}/${task.id}`);
+        },
+      },
+      {
+        name: "Delete",
+        onClick: () => {
+          removeTask(task.id);
+        },
+      },
+    ],
+    [navigate, task.id]
+  );
 
   return (
     <Card
@@ -39,7 +60,7 @@ const TaskItem = ({ task }: props) => {
       ) : (
         <Typography>{task.name}</Typography>
       )}
-      <p>hello</p>
+      <Menu menuItems={menuItems} />
     </Card>
   );
 };
