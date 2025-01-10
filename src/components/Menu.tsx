@@ -19,7 +19,7 @@ const Menu = ({ menuItems }: props) => {
       <IconButton
         id="more-button"
         aria-label="more"
-        sx={{ position: "fixed", right: "0.5rem" }}
+        // sx={{ position: "fixed", right: "0.5rem" }}
         aria-control={open ? "more" : undefined}
         aria-haspopup={true}
         aria-expanded={open ? true : undefined}

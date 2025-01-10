@@ -8,6 +8,17 @@ import Home from "../pages/HomePage";
 
 const originalState = useTaskStore.getState();
 
+const clickTaskMenuButton = async () => {
+  const taskMenuButton = await screen.findByRole("button", { name: "more" });
+  await userEvent.click(taskMenuButton);
+  const editButton = await screen.findByRole("menuitem", { name: "Edit" });
+  const deleteButton = await screen.findByRole("menuitem", {
+    name: "Delete",
+  });
+
+  return { editButton, deleteButton };
+};
+
 describe("Home", () => {
   const name = "Foo";
 
@@ -19,6 +30,7 @@ describe("Home", () => {
           name: name,
           category: "Travel",
           description: "Foobar",
+          priority: 1,
           isComplete: false,
         },
       ],
@@ -53,6 +65,7 @@ describe("Home", () => {
         name: name,
         category: "Travel",
         description: "Foobar",
+        priority: 1,
         isComplete: true,
       },
     ]);
@@ -63,8 +76,25 @@ describe("Home", () => {
         name: name,
         category: "Travel",
         description: "Foobar",
+        priority: 1,
         isComplete: false,
       },
     ]);
+  });
+
+  test("clicking on a task should open a menu with options to edit and delete it", async () => {
+    render(<Stub />);
+
+    const { editButton, deleteButton } = await clickTaskMenuButton();
+    expect(editButton).toBeInTheDocument();
+    expect(deleteButton).toBeInTheDocument();
+  });
+
+  test("clicking 'delete' should delete the item", async () => {
+    render(<Stub />);
+
+    const { editButton, deleteButton } = await clickTaskMenuButton();
+    await userEvent.click(deleteButton);
+    expect(useTaskStore.getState().tasks).toEqual([]);
   });
 });

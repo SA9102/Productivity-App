@@ -1,5 +1,11 @@
 // MUI components
-import { Card, Typography } from "@mui/material";
+import {
+  Card,
+  CardActions,
+  CardContent,
+  IconButton,
+  Typography,
+} from "@mui/material";
 // Store
 import useTaskStore from "../store/taskStore";
 // Types
@@ -12,6 +18,8 @@ import { EDIT_TASK_ROUTE } from "../utils/fullRoutes";
 import { useLongPress } from "use-long-press";
 import Menu from "./Menu";
 import { useMemo } from "react";
+
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 type props = {
   task: taskType;
@@ -52,15 +60,20 @@ const TaskItem = ({ task }: props) => {
       key={task.id}
       onClick={() => toggleComplete(task.id)}
       {...bind(task.id)}
+      sx={{ display: "flex", justifyContent: "space-between" }}
     >
-      {task.isComplete ? (
-        <Typography sx={{ textDecoration: "line-through" }}>
-          {task.name}
-        </Typography>
-      ) : (
-        <Typography>{task.name}</Typography>
-      )}
-      <Menu menuItems={menuItems} />
+      <CardContent>
+        {task.isComplete ? (
+          <Typography sx={{ textDecoration: "line-through" }}>
+            {task.name}
+          </Typography>
+        ) : (
+          <Typography>{task.name}</Typography>
+        )}
+      </CardContent>
+      <CardActions>
+        <Menu menuItems={menuItems} />
+      </CardActions>
     </Card>
   );
 };

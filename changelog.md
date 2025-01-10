@@ -1,5 +1,9 @@
 # Change Log
 
+**10th January 2025**
+
+- More tests
+
 **9th January 2025**
 
 - Edit and delete tasks
