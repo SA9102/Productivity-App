@@ -1,5 +1,9 @@
 # Change Log
 
+**11th January 2025**
+
+- Can view description of asks.
+
 **10th January 2025**
 
 - More tests

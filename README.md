@@ -8,6 +8,8 @@ This new version will not only feature a better UI, but also cleaner and more st
 
 This is the master branch which contains the refactored application. To view the old application, see the 'legacy' branch.
 
+![Tasks page with a task named 'Foobar'](image.png)
+
 ## Tech Stack
 
 - React

@@ -1,13 +1,13 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect } from "vitest";
-import TaskForm from "../pages/TaskEntryPage";
+import TaskEntry from "../pages/TaskEntryPage";
 import userEvent from "@testing-library/user-event";
 import { createRoutesStub } from "react-router";
 import useTaskStore from "../store/taskStore";
 
 const originalState = useTaskStore.getState();
 
-describe("TaskForm", () => {
+describe("TaskEntry", () => {
   beforeEach(() => {
     useTaskStore.setState(originalState);
   });
@@ -15,7 +15,7 @@ describe("TaskForm", () => {
   const Stub = createRoutesStub([
     {
       path: "/add-task",
-      Component: TaskForm,
+      Component: TaskEntry,
       action() {
         return {};
       },
@@ -43,4 +43,6 @@ describe("TaskForm", () => {
       expect.objectContaining({ name: "" })
     );
   });
+
+  
 });

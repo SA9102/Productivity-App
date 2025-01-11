@@ -68,7 +68,10 @@ const TaskItem = ({ task }: props) => {
             {task.name}
           </Typography>
         ) : (
-          <Typography>{task.name}</Typography>
+          <>
+            <Typography>{task.name}</Typography>
+            <Typography>{task.description}</Typography>
+          </>
         )}
       </CardContent>
       <CardActions>

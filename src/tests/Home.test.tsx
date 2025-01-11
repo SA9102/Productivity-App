@@ -20,14 +20,28 @@ const clickTaskMenuButton = async () => {
 };
 
 describe("Home", () => {
-  const name = "Foo";
-
   beforeEach(() => {
     useTaskStore.setState({
       tasks: [
         {
           id: "5",
-          name: name,
+          name: "Foo",
+          category: "Travel",
+          description: "Foobar",
+          priority: 1,
+          isComplete: false,
+        },
+        {
+          id: "6",
+          name: "Bar",
+          category: "Travel",
+          description: "Foobar",
+          priority: 1,
+          isComplete: false,
+        },
+        {
+          id: "7",
+          name: "Qux",
           category: "Travel",
           description: "Foobar",
           priority: 1,
@@ -50,9 +64,15 @@ describe("Home", () => {
   it("should display all task names that are in the global state", async () => {
     render(<Stub />);
 
-    const task = await screen.findByText(name);
+    const taskFoo = await screen.findByText("Foo");
+    const taskBar = await screen.findByText("Bar");
+    const taskQux = await screen.findByText("Qux");
+    const taskBaz = screen.queryByText("Baz");
 
-    expect(task).toBeInTheDocument();
+    expect(taskFoo).toBeInTheDocument();
+    expect(taskBar).toBeInTheDocument();
+    expect(taskQux).toBeInTheDocument();
+    expect(taskBaz).not.toBeInTheDocument();
   });
 
   test("when a task item is clicked, it should toggle its 'isCompleted' value", async () => {
@@ -93,7 +113,7 @@ describe("Home", () => {
   test("clicking 'delete' should delete the item", async () => {
     render(<Stub />);
 
-    const { editButton, deleteButton } = await clickTaskMenuButton();
+    const { deleteButton } = await clickTaskMenuButton();
     await userEvent.click(deleteButton);
     expect(useTaskStore.getState().tasks).toEqual([]);
   });
