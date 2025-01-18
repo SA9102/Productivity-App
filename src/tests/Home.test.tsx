@@ -77,12 +77,12 @@ describe("Home", () => {
 
   test("when a task item is clicked, it should toggle its 'isCompleted' value", async () => {
     render(<Stub />);
-    const task = await screen.findByText(name);
+    const task = await screen.findByText("Foo");
     await userEvent.click(task);
     expect(useTaskStore.getState().tasks).toEqual([
       {
         id: "5",
-        name: name,
+        name: "Foo",
         category: "Travel",
         description: "Foobar",
         priority: 1,
