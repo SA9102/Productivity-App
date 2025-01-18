@@ -6,11 +6,12 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 // Store
 import useTaskStore from "../store/taskStore";
 // Types
 import taskType from "../types/taskType";
-// React Routet
+// React Router
 import { useNavigate } from "react-router";
 // Utils
 import { EDIT_TASK_ROUTE } from "../utils/fullRoutes";
@@ -60,19 +61,40 @@ const TaskItem = ({ task }: props) => {
       key={task.id}
       onClick={() => toggleComplete(task.id)}
       {...bind(task.id)}
-      sx={{ display: "flex", justifyContent: "space-between" }}
+      sx={{
+        display: "flex",
+        justifyContent: "space-between",
+        borderLeft:
+          task.priority === 1
+            ? "2px solid green"
+            : task.priority === 2
+            ? "2px solid orange"
+            : task.priority === 3
+            ? "2px solid red"
+            : "",
+      }}
     >
-      <CardContent>
-        {task.isComplete ? (
+      <CardContent
+        sx={{
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+        }}
+      >
+        {/* {task.isComplete ? (
           <Typography sx={{ textDecoration: "line-through" }}>
             {task.name}
           </Typography>
-        ) : (
-          <>
-            <Typography>{task.name}</Typography>
-            <Typography>{task.description}</Typography>
-          </>
-        )}
+        ) : ( */}
+        <>
+          <Typography>{task.name}</Typography>
+          <Typography sx={{ fontSize: "0.8rem" }}>
+            {task.description}
+          </Typography>
+          {/* <Typography sx={{ fontSize: "0.8rem", fontStyle: "italic" }}>
+            <AccessTimeIcon sx={{ fontSize: "0.8rem" }} /> Hello
+          </Typography> */}
+        </>
+        {/* )} */}
       </CardContent>
       <CardActions>
         <Menu menuItems={menuItems} />

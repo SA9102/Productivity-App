@@ -1,5 +1,15 @@
 # Change Log
 
+**18th January 2025**
+
+- Added some dummy tasks on load for testing purposes.
+- Can choose priority of tasks.
+- An option for no priority.
+- Priority of tasks depicted as a colour on the left border of a task (no colour means no priority, green means low, orange means medium, red means high).
+- If the description of a task item is too long to fit onto one line, the overflow will be hidden.
+
+(A week break due to university exams)
+
 **11th January 2025**
 
 - Can view description of asks.

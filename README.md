@@ -2,7 +2,7 @@
 
 Stay organised and focused with this simple yet efficient todo application.
 
-I am working on refactoring and making changes to the previous todo app that I was working on before.
+This application is still in development. I am working on refactoring and making changes to the previous todo app that I was working on before. See the 'legacy' branch for the old version of the application.
 
 This new version will not only feature a better UI, but also cleaner and more structured code.
 
@@ -26,6 +26,8 @@ This is the master branch which contains the refactored application. To view the
 - Remove all completed tasks at once
 
 ## Development
+
+The purpose of this project is to see how far I can go and turn a simple, basic todo application into a real productivity tool that is responsive, intuitive and efficient, where the code written is maintainable and broken down into reusable components.
 
 This application will be my most complex one so far, not only in terms of the scope, but also the tech stack and good development practices that I will use, such as adhering to the single responsibility prinicple, and separating the UI from the logic. This project is an opportunity to not only consolidate what I have learnt on my journey of learning, but also to really level up my software development skills and knowledge.
 
