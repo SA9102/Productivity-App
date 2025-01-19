@@ -13,9 +13,7 @@ type props = {
 
 // Renders a list of task items
 const TasksList = ({ filter }: props) => {
-  console.log("FILTER:", filter);
   const tasks = useFilterTasks(filter);
-  console.log("TASKS", tasks);
   return (
     <Stack gap="0.5rem">
       {tasks.map((task) => (

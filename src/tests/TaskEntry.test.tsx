@@ -43,6 +43,4 @@ describe("TaskEntry", () => {
       expect.objectContaining({ name: "" })
     );
   });
-
-  
 });

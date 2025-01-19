@@ -77,9 +77,9 @@ I may remove some of them if I think they are not very good. -->
 
 - [ ] Show only incomplete tasks
 - [ ] Show only completed tasks
-- [ ] Filter tasks by name/description via search bar
+- [x] Filter tasks by text within their name/description
 - [ ] Filter tasks by category
-- [ ] Filter tasks by priority level
+- [x] Filter tasks by priority level
 - [ ] Search tasks with advanced Boolean logic (advanced)
 - [ ] Sort tasks by due date, creation date, or priority (basic)
 - [ ] Combine multiple filters for customized views (intermediate)

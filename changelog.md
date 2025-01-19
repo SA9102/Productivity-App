@@ -3,7 +3,9 @@
 **19th January 2025**
 
 - Filter tasks by text within their name or description.
-- Filter tasks by priority
+- Filter tasks by priority.
+- Filter settings persist after refreshing page and navigating between pages.
+- More tests for Home page.
 
 **18th January 2025**
 

@@ -10,13 +10,21 @@ const useFilterTasks = (filter: taskFilterType) => {
   if (filter.text !== "") {
     tasksFiltered = tasksFiltered.filter(
       (task) =>
-        task.name.toLowerCase().includes(filter.text) ||
-        task.description.toLowerCase().includes(filter.text)
+        task.name
+          .toLowerCase()
+          .trim()
+          .includes(filter.text.toLowerCase().trim()) ||
+        task.description
+          .toLowerCase()
+          .trim()
+          .includes(filter.text.toLowerCase().trim())
     );
   }
 
   // Filter the existing 'taskFiltered' by priority
-
+  // You can show tasks with one or more of: none, low, medium, high
+  // Get the task's priority, then if that priority is 'true' within 'filter',
+  // then keep this task.
   tasksFiltered = tasksFiltered.filter(
     (task) => filter.priority[task.priority]
   );
