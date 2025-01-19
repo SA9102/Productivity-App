@@ -18,18 +18,12 @@ import useTaskStore from "../store/taskStore";
 // Utils
 import { ADD_TASK_ROUTE } from "../utils/fullRoutes";
 import TasksList from "../components/TasksList";
-import { useState } from "react";
-
-import TaskFilterControl from "../components/TaskFilterControl";
-// Types
-import taskFilterType from "../types/taskFilterType";
+// Custom hooks
+import useTaskFilterStorage from "../hooks/useTaskFilterStorage";
 
 const HomePage = () => {
   const tasks = useTaskStore((state) => state.tasks);
-  const [filter, setFilter] = useState<taskFilterType>({
-    text: "",
-    priority: { none: true, low: true, medium: true, high: true },
-  });
+  const [filter, setFilter] = useTaskFilterStorage();
 
   return (
     <Box>
@@ -126,7 +120,12 @@ const HomePage = () => {
           <TasksList filter={filter} />
         </>
       )}
-      <NavLink to={ADD_TASK_ROUTE}>
+      <NavLink
+        to={ADD_TASK_ROUTE}
+        onClick={() =>
+          localStorage.setItem("taskFilter", JSON.stringify(filter))
+        }
+      >
         <Fab
           sx={{ position: "fixed", bottom: "30px", right: "30px" }}
           color="primary"
