@@ -18,12 +18,12 @@ import { Link, useLocation, useNavigate } from "react-router";
 import taskType from "../types/taskType";
 
 // Util imports
-import getEmptyTask from "../utils/getEmptyTask";
+import getEmptyTask from "../utils/functions/getEmptyTask";
 import { HOME_ROUTE } from "../utils/fullRoutes";
 
 // Store imports
 import useTaskStore from "../store/taskStore";
-import getLastRouteSegment from "../utils/getLastRouteSegment";
+import getLastRouteSegment from "../utils/functions/getLastRouteSegment";
 
 // This page renders the input fields for a task.
 // This is used either when adding a new task, or when editing a task that exists.

@@ -1,5 +1,5 @@
 // MUI
-import { Box, Typography, Fab } from "@mui/material";
+import { Box, Typography, Fab, TextField } from "@mui/material";
 // Icons
 import AddIcon from "@mui/icons-material/Add";
 // React Router
@@ -9,9 +9,11 @@ import useTaskStore from "../store/taskStore";
 // Utils
 import { ADD_TASK_ROUTE } from "../utils/fullRoutes";
 import TasksList from "../components/TasksList";
+import { useState } from "react";
 
 const HomePage = () => {
   const tasks = useTaskStore((state) => state.tasks);
+  const [filter, setFilter] = useState("");
 
   return (
     <Box>
@@ -20,7 +22,17 @@ const HomePage = () => {
           You don't have any tasks to do.
         </Typography>
       ) : (
-        <TasksList />
+        <>
+          <TextField
+            variant="outlined"
+            id="name-and-description-filter"
+            label="Filter"
+            aria-describedby="name-and-description-filter"
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+          />
+          <TasksList filter={filter.toLowerCase().trim()} />
+        </>
       )}
       <NavLink to={ADD_TASK_ROUTE}>
         <Fab

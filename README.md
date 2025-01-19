@@ -2,6 +2,10 @@
 
 Stay organised and focused with this simple yet efficient todo application.
 
+[View live demo on GitHub Pages](https://sa9102.github.io/Todo-App/)
+
+[View live demo + code on StackBlitz (Please allow up to 30-40 seconds for the live demo to load)](https://stackblitz.com/~/github.com/SA9102/Todo-App?initialPath=/Todo-App)
+
 This application is still in development. I am working on refactoring and making changes to the previous todo app that I was working on before. See the 'legacy' branch for the old version of the application.
 
 This new version will not only feature a better UI, but also cleaner and more structured code.
@@ -17,13 +21,22 @@ This is the master branch which contains the refactored application. To view the
 - Vite
 - Vitest
 - React Testing Library
+- Zustand
 - React Router
 - MUI
 
-## Features
+## :control_knobs: Features
 
 - Add tasks
+- Edit tasks
+- Delete tasks
+- Give tasks a name, and optionally a description, category and priority
 - Remove all completed tasks at once
+- Filter tasks by text within their name or description
+
+See [requirements.md](requirements.md) about the planned features.
+
+Once this application takes shape, I plan to also make this a progressive web application (PWA) so it can be installed as a standalone app.
 
 ## Development
 
@@ -31,19 +44,19 @@ The purpose of this project is to see how far I can go and turn a simple, basic 
 
 This application will be my most complex one so far, not only in terms of the scope, but also the tech stack and good development practices that I will use, such as adhering to the single responsibility prinicple, and separating the UI from the logic. This project is an opportunity to not only consolidate what I have learnt on my journey of learning, but also to really level up my software development skills and knowledge.
 
-Here are a few key points to note about this project:
+Here are a few key points to note about this project from a development perspective:
 
 <!-- - I have been quite serious about the maintainability and reusability of the code. For this, I have written many custom hooks (something I haven't done before in any project) and higher order components (also something I haven't done before). I have taken care to extract reused logic into its own separate unit which can be extended and reused anytime.
 - I have written some tests for each component. Instead of testing for every single detail, they just test the features. -->
 
 - I am using the mobile-first design approach - I am first building for mobile devices, and then will scale up the design to be responsive for bigger screens.
-- I am using Vitest and React Testing Library, I am testing for the main features (see requirements.md) of the app, and for proper integration between components. This is my first React application where I am including tests. I am learning how to use React Testing Library to test components.
+- I am learning to use Vitest and React Testing Library, and I am testing for the main features (see [requirements.md](requirements.md)) of the app, and for proper integration between components. This is my first React application where I am including tests.
 - I decided to use some global statement management, as this would be good to store tasks, and would make it easier to scale up the application. For this, I am learning how to use Zustand.
-- My first project when I am making use of custom hooks to extract repeated logic, which not only means being able to re-use logic but also separates the logic from the views.
+- My first project when I am making use of custom hooks to extract repeated logic, which not only means being able to re-use logic in multiple areas, but also separates the logic from the markup.
 
 ## Requirements
 
-See [requirements.mid](requirements.md) for more information about the planned, and already-implemented, features.
+See [requirements.md](requirements.md) for more information about the planned, and already-implemented, features.
 
 ## Change Log
 
