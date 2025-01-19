@@ -5,6 +5,7 @@ import userEvent from "@testing-library/user-event";
 import { createRoutesStub } from "react-router";
 import useTaskStore from "../store/taskStore";
 import Home from "../pages/HomePage";
+import dummyTasks from "../utils/dummyTasks";
 
 const originalState = useTaskStore.getState();
 
@@ -22,32 +23,7 @@ const clickTaskMenuButton = async () => {
 describe("Home", () => {
   beforeEach(() => {
     useTaskStore.setState({
-      tasks: [
-        {
-          id: "5",
-          name: "Foo",
-          category: "Travel",
-          description: "Foobar",
-          priority: 1,
-          isComplete: false,
-        },
-        {
-          id: "6",
-          name: "Bar",
-          category: "Travel",
-          description: "Foobar",
-          priority: 1,
-          isComplete: false,
-        },
-        {
-          id: "7",
-          name: "Qux",
-          category: "Travel",
-          description: "Foobar",
-          priority: 1,
-          isComplete: false,
-        },
-      ],
+      tasks: dummyTasks,
     });
   });
 

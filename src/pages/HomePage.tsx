@@ -1,5 +1,14 @@
 // MUI
-import { Box, Typography, Fab, TextField } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Fab,
+  TextField,
+  Stack,
+  Checkbox,
+  FormGroup,
+  FormControlLabel,
+} from "@mui/material";
 // Icons
 import AddIcon from "@mui/icons-material/Add";
 // React Router
@@ -11,9 +20,16 @@ import { ADD_TASK_ROUTE } from "../utils/fullRoutes";
 import TasksList from "../components/TasksList";
 import { useState } from "react";
 
+import TaskFilterControl from "../components/TaskFilterControl";
+// Types
+import taskFilterType from "../types/taskFilterType";
+
 const HomePage = () => {
   const tasks = useTaskStore((state) => state.tasks);
-  const [filter, setFilter] = useState("");
+  const [filter, setFilter] = useState<taskFilterType>({
+    text: "",
+    priority: { none: true, low: true, medium: true, high: true },
+  });
 
   return (
     <Box>
@@ -23,15 +39,91 @@ const HomePage = () => {
         </Typography>
       ) : (
         <>
+          {/* <TaskFilterControl /> */}
           <TextField
             variant="outlined"
             id="name-and-description-filter"
             label="Filter"
             aria-describedby="name-and-description-filter"
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
+            value={filter.text}
+            onChange={(e) =>
+              setFilter({
+                ...filter,
+                text: e.target.value,
+              })
+            }
           />
-          <TasksList filter={filter.toLowerCase().trim()} />
+          <FormGroup>
+            <FormControlLabel
+              label="No priority"
+              control={
+                <Checkbox
+                  checked={filter.priority.none}
+                  onClick={() =>
+                    setFilter({
+                      ...filter,
+                      priority: {
+                        ...filter.priority,
+                        none: !filter.priority.none,
+                      },
+                    })
+                  }
+                />
+              }
+            />
+            <FormControlLabel
+              label="Low"
+              control={
+                <Checkbox
+                  checked={filter.priority.low}
+                  onClick={() =>
+                    setFilter({
+                      ...filter,
+                      priority: {
+                        ...filter.priority,
+                        low: !filter.priority.low,
+                      },
+                    })
+                  }
+                />
+              }
+            />
+            <FormControlLabel
+              label="Medium"
+              control={
+                <Checkbox
+                  checked={filter.priority.medium}
+                  onClick={() =>
+                    setFilter({
+                      ...filter,
+                      priority: {
+                        ...filter.priority,
+                        medium: !filter.priority.medium,
+                      },
+                    })
+                  }
+                />
+              }
+            />
+            <FormControlLabel
+              label="High"
+              control={
+                <Checkbox
+                  checked={filter.priority.high}
+                  onClick={() =>
+                    setFilter({
+                      ...filter,
+                      priority: {
+                        ...filter.priority,
+                        high: !filter.priority.high,
+                      },
+                    })
+                  }
+                />
+              }
+            />
+          </FormGroup>
+          <TasksList filter={filter} />
         </>
       )}
       <NavLink to={ADD_TASK_ROUTE}>

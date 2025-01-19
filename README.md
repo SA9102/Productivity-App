@@ -14,6 +14,8 @@ This is the master branch which contains the refactored application. To view the
 
 ![Tasks page with a task named 'Foobar'](image.png)
 
+My focus right now is on the functionality, so the user interface isn't very appealing at the moment, but I will work on this as the application takes shape.
+
 ## Tech Stack
 
 - React
@@ -61,6 +63,10 @@ See [requirements.md](requirements.md) for more information about the planned, a
 ## Change Log
 
 See [changelog.md](changelog.md) for more information about the changes on each day there was a commit.
+
+## Known Issues
+
+- Filter settings don't persist after refreshing or changing page
 
 <!-- # :zap: Todo App
 

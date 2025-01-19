@@ -3,6 +3,7 @@
 **19th January 2025**
 
 - Filter tasks by text within their name or description.
+- Filter tasks by priority
 
 **18th January 2025**
 

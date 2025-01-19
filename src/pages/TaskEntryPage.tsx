@@ -90,26 +90,26 @@ const TaskForm = () => {
         </TextField>
         <ButtonGroup variant="contained">
           <Button
-            onClick={() => setTaskInput({ ...taskInput, priority: 0 })}
-            color={taskInput.priority === 0 ? "secondary" : "primary"}
+            onClick={() => setTaskInput({ ...taskInput, priority: "none" })}
+            color={taskInput.priority === "none" ? "secondary" : "primary"}
           >
             None
           </Button>
           <Button
-            onClick={() => setTaskInput({ ...taskInput, priority: 1 })}
-            color={taskInput.priority === 1 ? "secondary" : "primary"}
+            onClick={() => setTaskInput({ ...taskInput, priority: "low" })}
+            color={taskInput.priority === "low" ? "secondary" : "primary"}
           >
             Low
           </Button>
           <Button
-            onClick={() => setTaskInput({ ...taskInput, priority: 2 })}
-            color={taskInput.priority === 2 ? "secondary" : "primary"}
+            onClick={() => setTaskInput({ ...taskInput, priority: "medium" })}
+            color={taskInput.priority === "medium" ? "secondary" : "primary"}
           >
             Medium
           </Button>
           <Button
-            onClick={() => setTaskInput({ ...taskInput, priority: 3 })}
-            color={taskInput.priority === 3 ? "secondary" : "primary"}
+            onClick={() => setTaskInput({ ...taskInput, priority: "high" })}
+            color={taskInput.priority === "high" ? "secondary" : "primary"}
           >
             High
           </Button>

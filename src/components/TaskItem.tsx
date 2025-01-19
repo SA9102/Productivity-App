@@ -65,11 +65,11 @@ const TaskItem = ({ task }: props) => {
         display: "flex",
         justifyContent: "space-between",
         borderLeft:
-          task.priority === 1
+          task.priority === "low"
             ? "2px solid green"
-            : task.priority === 2
+            : task.priority === "medium"
             ? "2px solid orange"
-            : task.priority === 3
+            : task.priority === "high"
             ? "2px solid red"
             : "",
       }}
