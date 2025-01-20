@@ -1,5 +1,9 @@
 # Change Log
 
+**20th January 2025**
+
+- Changes to layout and colour scheme.
+
 **19th January 2025**
 
 - Filter tasks by text within their name or description.

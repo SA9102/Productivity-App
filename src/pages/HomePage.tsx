@@ -26,7 +26,15 @@ const HomePage = () => {
   const [filter, setFilter] = useTaskFilterStorage();
 
   return (
-    <Box>
+    <Stack gap="1rem" maxWidth="900px">
+      <Typography
+        variant="h4"
+        component="h1"
+        alignSelf="center"
+        textAlign="center"
+      >
+        My Tasks
+      </Typography>
       {tasks.length === 0 ? (
         <Typography textAlign="center">
           You don't have any tasks to do.
@@ -34,7 +42,7 @@ const HomePage = () => {
       ) : (
         <>
           {/* <TaskFilterControl /> */}
-          <TextField
+          {/* <TextField
             variant="outlined"
             id="name-and-description-filter"
             label="Filter"
@@ -46,8 +54,8 @@ const HomePage = () => {
                 text: e.target.value,
               })
             }
-          />
-          <FormGroup>
+          /> */}
+          {/* <FormGroup>
             <FormControlLabel
               label="No priority"
               control={
@@ -116,7 +124,7 @@ const HomePage = () => {
                 />
               }
             />
-          </FormGroup>
+          </FormGroup> */}
           <TasksList filter={filter} />
         </>
       )}
@@ -134,7 +142,7 @@ const HomePage = () => {
           <AddIcon />
         </Fab>
       </NavLink>
-    </Box>
+    </Stack>
   );
 };
 

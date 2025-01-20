@@ -66,7 +66,7 @@ See [changelog.md](changelog.md) for more information about the changes on each 
 
 ## Known Issues
 
-- A task is not visibly marked as completed when it is checked off
+No known issues.
 
 <!-- # :zap: Todo App
 

@@ -38,11 +38,11 @@ const App = () => {
 
   return (
     <Stack>
-      {path === "/Todo-App" ? (
+      {/* {path === "/Todo-App" ? (
         <AppBar title="Home" />
       ) : (
         <AppBarWithArrow title={getTitle()} path={HOME_ROUTE} />
-      )}
+      )} */}
       <Box sx={{ margin: "2rem" }}>
         <Routes>
           <Route path={HOME_ROUTE} element={<HomePage />} />
