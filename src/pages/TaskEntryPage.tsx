@@ -135,6 +135,9 @@ const TaskForm = () => {
             Update Task
           </Button>
         )}
+        <Button component={Link} to={HOME_ROUTE}>
+          Cancel
+        </Button>
       </FormControl>
     </>
   );

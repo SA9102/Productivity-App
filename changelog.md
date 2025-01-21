@@ -1,5 +1,10 @@
 # Change Log
 
+**21st January 2025**
+
+- Instead of a menu button for each task, the 'edit' and 'delete' buttons are now directly on the task item
+- Made the priority colours better
+
 **20th January 2025**
 
 - Changes to layout and colour scheme.

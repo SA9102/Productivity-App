@@ -5,16 +5,28 @@ import dummyTasks from "../utils/dummyTasks";
 
 type state = {
   tasks: taskType[];
-  addTask: (task: taskType) => void;
-  removeTask: (taskId: string) => void;
 };
 
 type actions = {
+  deleteCompletedTasks: () => void;
   addTask: (task: taskType) => void;
   updateTask: (updatedTask: taskType) => void;
-  removeTask: (taskId: string) => void;
+  deleteTask: (taskId: string) => void;
   toggleComplete: (taskId: string) => void;
-  removeCompletedTasks: () => void;
+  sortTasks: () => void;
+  // sortTasks: (criterion: "name" | "priority") => void;
+};
+
+const compare = (taskA: taskType, taskB: taskType) => {
+  if (taskA.name < taskB.name) {
+    return -1;
+  }
+
+  if (taskA.name > taskB.name) {
+    return 1;
+  }
+
+  return 0;
 };
 
 const useTaskStore = create<state & actions>()((set) => ({
@@ -35,8 +47,8 @@ const useTaskStore = create<state & actions>()((set) => ({
         return task;
       }),
     })),
-  // Remove a task by id
-  removeTask: (taskId: string) =>
+  // Delete a task by id
+  deleteTask: (taskId: string) =>
     set((state) => ({
       tasks: state.tasks.filter((task: taskType) => task.id !== taskId),
     })),
@@ -52,10 +64,22 @@ const useTaskStore = create<state & actions>()((set) => ({
       }),
     })),
 
-  // Remove all completed tasks at once
-  removeCompletedTasks: () =>
+  // Delete all completed tasks at once
+  deleteCompletedTasks: () =>
     set((state) => ({
       tasks: state.tasks.filter((task: taskType) => !task.isComplete),
+    })),
+
+  // Sorts tasks by a given criterion
+  // sortTasks: () => {
+  //   set((state) => ({
+  //     tasks: state.tasks.sort(compare),
+  //   }));
+  // },
+
+  sortTasks: () =>
+    set((state) => ({
+      tasks: state.tasks.sort(compare),
     })),
 }));
 

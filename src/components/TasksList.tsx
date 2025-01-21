@@ -7,6 +7,8 @@ import useFilterTasks from "../hooks/useFilterTasks";
 // Custom types
 import taskFilterType from "../types/taskFilterType";
 import { grey } from "@mui/material/colors";
+import { useState } from "react";
+import useTaskStore from "../store/taskStore";
 
 type props = {
   filter: taskFilterType;
@@ -15,7 +17,33 @@ type props = {
 // Renders a list of task items
 const TasksList = ({ filter }: props) => {
   const theme = useTheme();
+  // const sortTasks = useTaskStore((state) => state.sortTasks);
+  // sortTasks();
+  // const tasks = useTaskStore((state) => state.tasks);
   const tasks = useFilterTasks(filter);
+
+  // const [draggedIndex, setDraggedIndex] = useState(null);
+
+  // const handleDragStart = (index) => {
+  //   setDraggedIndex(index);
+  // };
+
+  // const handleDragOver = (e) => {
+  //   e.preventDefault();
+  // };
+
+  // const handleDrop = (index) => {
+  //   const updatedItems = [...tasks];
+  //   const [draggedItem] = updatedItems.splice(draggedIndex, 1);
+  //   updatedItems.splice(index, 0, draggedItem);
+
+  //   setItem(updatedItems);
+  //   setDraggedIndex(null);
+  // };
+
+  // const onDragStart = (e, id) => {
+  //   e.transfer
+  // }
   return (
     // <Paper
     //   sx={{
@@ -29,9 +57,10 @@ const TasksList = ({ filter }: props) => {
     //     <TaskItem task={task} />
     //   ))}
     // </Paper>
+
     <Stack gap="0.5rem">
       {tasks.map((task) => (
-        <TaskItem task={task} />
+        <TaskItem key={task.id} task={task} />
       ))}
     </Stack>
   );

@@ -8,6 +8,10 @@ import {
   Checkbox,
   FormGroup,
   FormControlLabel,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from "@mui/material";
 // Icons
 import AddIcon from "@mui/icons-material/Add";
@@ -125,6 +129,16 @@ const HomePage = () => {
               }
             />
           </FormGroup> */}
+          <Stack direction="row" gap="1rem">
+            <FormControl>
+              <Typography>Sort by</Typography>
+              <Select>
+                <MenuItem>Name</MenuItem>
+                <MenuItem>Priority</MenuItem>
+              </Select>
+            </FormControl>
+            <Typography>Ascending: true</Typography>
+          </Stack>
           <TasksList filter={filter} />
         </>
       )}

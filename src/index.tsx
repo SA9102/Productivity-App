@@ -10,6 +10,12 @@ import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import TaskForm from "./pages/TaskEntryPage.tsx";
 import { grey } from "@mui/material/colors";
 
+// const theme = createTheme({
+//   colorSchemes: {
+//     dark: true,
+//   },
+// });
+
 const darkTheme = createTheme({
   typography: {
     fontFamily: "Lexend",

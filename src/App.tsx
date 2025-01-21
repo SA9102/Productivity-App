@@ -1,6 +1,18 @@
-import { Box, Fab, Stack, Typography } from "@mui/material";
+import {
+  BottomNavigation,
+  BottomNavigationAction,
+  Box,
+  Fab,
+  Stack,
+  Typography,
+  AppBar,
+  IconButton,
+  Button,
+  useColorScheme,
+  createTheme,
+} from "@mui/material";
 // MUI icons
-
+import LightModeIcon from "@mui/icons-material/LightMode";
 // Utils
 import {
   HOME_ROUTE,
@@ -9,7 +21,7 @@ import {
 } from "./utils/fullRoutes";
 
 // Custom components
-import AppBar from "./components/AppBar";
+// import AppBar from "./components/AppBar";
 import AppBarWithArrow from "./components/AppBarWithArrow";
 
 // Pages
@@ -18,9 +30,16 @@ import TaskEntryPage from "./pages/TaskEntryPage";
 
 // React Router
 import { Routes, Route, useLocation } from "react-router";
+import { useState } from "react";
 
 const App = () => {
   const path = useLocation().pathname;
+  const { mode, setMode } = useColorScheme();
+  // const [mode, setMode] = useState("dark");
+
+  // const toggleTheme = () => {
+  //   setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+  // };
 
   // Gets the last path segment of the path, capitalises each word, and replaces
   // the hyphens with a space. This is used for the title in the AppBar component.
@@ -38,12 +57,12 @@ const App = () => {
 
   return (
     <Stack>
-      {/* {path === "/Todo-App" ? (
-        <AppBar title="Home" />
-      ) : (
-        <AppBarWithArrow title={getTitle()} path={HOME_ROUTE} />
-      )} */}
-      <Box sx={{ margin: "2rem" }}>
+      <Stack direction="row">
+        <IconButton onClick={() => setMode("dark")}>
+          <LightModeIcon />
+        </IconButton>
+      </Stack>
+      <Box sx={{ margin: "0.5rem 2rem" }}>
         <Routes>
           <Route path={HOME_ROUTE} element={<HomePage />} />
           <Route path={ADD_TASK_ROUTE} element={<TaskEntryPage />} />
