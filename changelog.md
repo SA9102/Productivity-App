@@ -1,13 +1,18 @@
 # Change Log
 
+\*24th January 2025\*\*
+
+- Option to switch between list and grid view (grid view still needs to be improved)
+
 **21st January 2025**
 
-- Instead of a menu button for each task, the 'edit' and 'delete' buttons are now directly on the task item
-- Made the priority colours better
+- Instead of a menu button for each task, the 'edit' and 'delete' buttons are now directly on the task item.
+- Made the priority colours better.
+- The top bar has been removed.
 
 **20th January 2025**
 
-- Changes to layout and colour scheme.
+- Changes to layout and colour scheme, giving it a more modern look.
 
 **19th January 2025**
 

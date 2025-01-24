@@ -6,16 +6,18 @@ import TaskItem from "./TaskItem";
 import useFilterTasks from "../hooks/useFilterTasks";
 // Custom types
 import taskFilterType from "../types/taskFilterType";
+import tasksViewType from "../types/tasksViewType";
 import { grey } from "@mui/material/colors";
 import { useState } from "react";
 import useTaskStore from "../store/taskStore";
 
 type props = {
   filter: taskFilterType;
+  view: tasksViewType;
 };
 
 // Renders a list of task items
-const TasksList = ({ filter }: props) => {
+const TasksList = ({ filter, view }: props) => {
   const theme = useTheme();
   // const sortTasks = useTaskStore((state) => state.sortTasks);
   // sortTasks();
@@ -57,12 +59,26 @@ const TasksList = ({ filter }: props) => {
     //     <TaskItem task={task} />
     //   ))}
     // </Paper>
-
-    <Stack gap="0.5rem">
-      {tasks.map((task) => (
-        <TaskItem key={task.id} task={task} />
-      ))}
-    </Stack>
+    <>
+      {view === "list" ? (
+        <Stack gap="0.5rem">
+          {tasks.map((task) => (
+            <TaskItem key={task.id} task={task} />
+          ))}
+        </Stack>
+      ) : (
+        <Stack
+          gap="0.5rem"
+          direction="row"
+          flexWrap="wrap"
+          alignContent="center"
+        >
+          {tasks.map((task) => (
+            <TaskItem key={task.id} task={task} />
+          ))}
+        </Stack>
+      )}
+    </>
   );
 };
 

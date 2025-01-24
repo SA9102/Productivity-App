@@ -34,6 +34,16 @@ const darkTheme = createTheme({
         }),
       },
     },
+    MuiButton: {
+      defaultProps: {
+        disableRipple: true,
+      },
+    },
+    MuiToggleButton: {
+      defaultProps: {
+        disableRipple: true,
+      },
+    },
   },
 });
 

@@ -12,9 +12,15 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Button,
+  ToggleButton,
+  ToggleButtonGroup,
+  LinearProgress,
 } from "@mui/material";
 // Icons
 import AddIcon from "@mui/icons-material/Add";
+import ListIcon from "@mui/icons-material/List";
+import GridViewIcon from "@mui/icons-material/GridView";
 // React Router
 import { NavLink } from "react-router";
 // Store
@@ -24,10 +30,24 @@ import { ADD_TASK_ROUTE } from "../utils/fullRoutes";
 import TasksList from "../components/TasksList";
 // Custom hooks
 import useTaskFilterStorage from "../hooks/useTaskFilterStorage";
+import { useState } from "react";
+
+import tasksViewType from "../types/tasksViewType";
 
 const HomePage = () => {
   const tasks = useTaskStore((state) => state.tasks);
+  const sortTasks = useTaskStore((state) => state.sortTasks);
   const [filter, setFilter] = useTaskFilterStorage();
+  const [sortCriterion, setSortCriterion] = useState<"name" | "priority">(
+    "priority"
+  );
+  const [tasksView, setTasksView] = useState<tasksViewType>("list");
+
+  const handleChangeView = (e, newView: tasksViewType) => {
+    if (newView !== null) {
+      setTasksView(newView);
+    }
+  };
 
   return (
     <Stack gap="1rem" maxWidth="900px">
@@ -129,20 +149,74 @@ const HomePage = () => {
               }
             />
           </FormGroup> */}
-          <Stack direction="row" gap="1rem">
+          {/* <FormControl fullWidth>
+            <Typography>Sort by</Typography>
+            <InputLabel>AA</InputLabel>
+            <Select
+              variant="standard"
+              value={sortCriterion}
+              onChange={() => setSortCriterion("name")}
+              label="Sort By"
+            >
+              <MenuItem value="name">Name</MenuItem>
+              <MenuItem value="priority">Priority</MenuItem>
+            </Select>
+          </FormControl> */}
+          <Stack
+            direction="row"
+            gap="1rem"
+            alignItems="center"
+            // width="500px"
+          >
             <FormControl>
-              <Typography>Sort by</Typography>
-              <Select>
-                <MenuItem>Name</MenuItem>
-                <MenuItem>Priority</MenuItem>
-              </Select>
+              <Stack direction="row" alignItems="center" gap="1rem">
+                <Typography>Sort by</Typography>
+                <Select
+                  variant="standard"
+                  value={sortCriterion}
+                  onChange={(e) => {
+                    setSortCriterion(e.target.value);
+                  }}
+                  label="Sort By"
+                >
+                  <MenuItem value="name">name</MenuItem>
+                  <MenuItem value="priority">priority</MenuItem>
+                </Select>
+              </Stack>
+              <Stack direction="row" alignItems="center" gap="1rem">
+                <Typography>Ascending</Typography>
+                <Select variant="standard">
+                  <MenuItem>True</MenuItem>
+                  <MenuItem>False</MenuItem>
+                </Select>
+              </Stack>
+              <Button
+                onClick={() => {
+                  sortTasks(sortCriterion);
+                  // setFilter("a");
+                }}
+              >
+                Go
+              </Button>
             </FormControl>
-            <Typography>Ascending: true</Typography>
           </Stack>
-          <TasksList filter={filter} />
+          <ToggleButtonGroup
+            value={tasksView}
+            onChange={handleChangeView}
+            exclusive
+          >
+            <ToggleButton value="list">
+              <ListIcon />
+            </ToggleButton>
+            <ToggleButton value="grid">
+              <GridViewIcon />
+            </ToggleButton>
+          </ToggleButtonGroup>
+          <LinearProgress variant="determinate" />
+          <TasksList filter={filter} view={tasksView} />
         </>
       )}
-      <NavLink
+      {/* <NavLink
         to={ADD_TASK_ROUTE}
         onClick={() =>
           localStorage.setItem("taskFilter", JSON.stringify(filter))
@@ -155,7 +229,7 @@ const HomePage = () => {
         >
           <AddIcon />
         </Fab>
-      </NavLink>
+      </NavLink> */}
     </Stack>
   );
 };

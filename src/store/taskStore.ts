@@ -13,11 +13,30 @@ type actions = {
   updateTask: (updatedTask: taskType) => void;
   deleteTask: (taskId: string) => void;
   toggleComplete: (taskId: string) => void;
-  sortTasks: () => void;
-  // sortTasks: (criterion: "name" | "priority") => void;
+  sortTasks: (criterion: "name" | "priority") => void;
 };
 
-const compare = (taskA: taskType, taskB: taskType) => {
+const a = (x) => {
+  const criterion = x;
+
+  return (taskA: taskType, taskB: taskType) => {
+    if (criterion === "name") {
+      if (taskA.name < taskB.name) {
+        return -1;
+      }
+
+      if (taskA.name > taskB.name) {
+        return 1;
+      }
+
+      return 0;
+    } else if (criterion == "priority") {
+      console.log("PRIORITY");
+    }
+  };
+};
+
+const compaare = (taskA: taskType, taskB: taskType) => {
   if (taskA.name < taskB.name) {
     return -1;
   }
@@ -77,10 +96,27 @@ const useTaskStore = create<state & actions>()((set) => ({
   //   }));
   // },
 
-  sortTasks: () =>
+  sortTasks: (criterion) => {
+    const compare = (taskA: taskType, taskB: taskType) => {
+      if (criterion === "name") {
+        if (taskA.name < taskB.name) {
+          return -1;
+        }
+
+        if (taskA.name > taskB.name) {
+          return 1;
+        }
+
+        return 0;
+      } else {
+        return 0;
+      }
+    };
+
     set((state) => ({
       tasks: state.tasks.sort(compare),
-    })),
+    }));
+  },
 }));
 
 export default useTaskStore;

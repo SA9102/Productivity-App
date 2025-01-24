@@ -100,7 +100,8 @@ const TaskItem = ({ task }: props) => {
       <Paper
         draggable
         sx={{
-          height: "50px",
+          flex: 1,
+          // height: "50px",
           backgroundColor:
             theme.palette.mode === "light" ? grey[100] : grey[900],
           display: "flex",
