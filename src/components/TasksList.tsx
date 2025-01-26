@@ -6,7 +6,7 @@ import TaskItem from "./TaskItem";
 import useFilterTasks from "../hooks/useFilterTasks";
 // Custom types
 import taskFilterType from "../types/taskFilterType";
-import tasksViewType from "../types/tasksViewType";
+import tasksViewType from "../types/tasksLayoutType";
 import { grey } from "@mui/material/colors";
 import { useState } from "react";
 import useTaskStore from "../store/taskStore";

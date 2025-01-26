@@ -9,7 +9,7 @@ const dummyTasks: taskType[] = [
     category: "Travel",
     description: "Desc",
     priority: "low",
-    isComplete: false,
+    isComplete: true,
   },
   {
     id: "2",
@@ -41,7 +41,7 @@ const dummyTasks: taskType[] = [
     category: "Travel",
     description: "Description of Qux",
     priority: "low",
-    isComplete: false,
+    isComplete: true,
   },
 ];
 

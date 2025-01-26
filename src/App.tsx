@@ -25,7 +25,7 @@ import {
 import AppBarWithArrow from "./components/AppBarWithArrow";
 
 // Pages
-import HomePage from "./pages/HomePage";
+import HomePage from "./pages/HomePage/HomePage";
 import TaskEntryPage from "./pages/TaskEntryPage";
 
 // React Router

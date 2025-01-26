@@ -3,7 +3,7 @@ import { describe, it, expect } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { createRoutesStub } from "react-router";
 import useTaskStore from "../store/taskStore";
-import Home from "../pages/HomePage";
+import Home from "../pages/HomePage/HomePage";
 import dummyTasks from "../utils/dummyTasks";
 
 // When the 'options' button for a task item (the three vertical dots) is clicked

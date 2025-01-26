@@ -14,6 +14,8 @@ type actions = {
   deleteTask: (taskId: string) => void;
   toggleComplete: (taskId: string) => void;
   sortTasks: (criterion: "name" | "priority") => void;
+  getTasksNumber: () => number;
+  getCompletedTasksNumber: () => number;
 };
 
 const a = (x) => {
@@ -48,7 +50,7 @@ const compaare = (taskA: taskType, taskB: taskType) => {
   return 0;
 };
 
-const useTaskStore = create<state & actions>()((set) => ({
+const useTaskStore = create<state & actions>()((set, get) => ({
   // Stores all task items; they are objects of type taskType
   // tasks: [],
   tasks: dummyTasks,
@@ -117,6 +119,16 @@ const useTaskStore = create<state & actions>()((set) => ({
       tasks: state.tasks.sort(compare),
     }));
   },
+
+  getTasksNumber: () => get().tasks.length,
+
+  getCompletedTasksNumber: () =>
+    get().tasks.reduce((total, task) => {
+      if (task.isComplete) {
+        return total + 1;
+      }
+      return total;
+    }, 0),
 }));
 
 export default useTaskStore;

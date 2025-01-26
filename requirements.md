@@ -17,9 +17,9 @@ I may remove some of them if I think they are not very good. -->
 - [ ] Create categories
 - [ ] Edit categories
 - [ ] Delete categories
-- [ ] Assign tasks to specific team members (intermediate)
+<!-- - [ ] Assign tasks to specific team members (intermediate) -->
 - [ ] Clone existing tasks for quick creation (basic)
-- [ ] Mark tasks as favorites for quick access (basic)
+<!-- - [ ] Mark tasks as favorites for quick access (basic) -->
 - [ ] Undo accidental task deletion (intermediate)
 - [ ] Archive completed tasks instead of deleting (intermediate)
 - [ ] Assign recurring tasks with custom intervals (advanced)
@@ -27,9 +27,9 @@ I may remove some of them if I think they are not very good. -->
 - [ ] Add task reminders with custom notifications (advanced)
 - [ ] Import/export tasks to/from external tools like CSV (advanced)
 - [ ] Allow task dependencies to create sequential workflows (advanced)
-- [ ] Integrate tasks with a Kanban board view (advanced)
+<!-- - [ ] Integrate tasks with a Kanban board view (advanced) -->
 - [ ] Share tasks or categories with external users via links (advanced)
-- [ ] Assign subtasks to individual team members (intermediate)
+<!-- - [ ] Assign subtasks to individual team members (intermediate) -->
 - [ ] Timer to track the time spent on tasks (advanced)
 
 **Other Functionality**

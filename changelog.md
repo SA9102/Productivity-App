@@ -1,6 +1,13 @@
 # Change Log
 
-\*24th January 2025\*\*
+**26th January 2025**
+
+- Clicking on a task will mark it as complete and will make it transparent.
+- Progress bar indicating the percentage of tasks completed.
+
+_(Not many changes due to university workload)_
+
+**24th January 2025**
 
 - Option to switch between list and grid view (grid view still needs to be improved)
 

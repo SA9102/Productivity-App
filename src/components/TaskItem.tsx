@@ -1,3 +1,5 @@
+import TaskItemCSS from "./TaskItem.module.css";
+
 // MUI components
 import {
   Card,
@@ -98,6 +100,7 @@ const TaskItem = ({ task }: props) => {
   return (
     <>
       <Paper
+        className={TaskItemCSS["task-item-container"]}
         draggable
         sx={{
           flex: 1,
@@ -110,7 +113,10 @@ const TaskItem = ({ task }: props) => {
           borderLeftWidth: "5px",
           borderLeftStyle: "solid",
           borderLeftColor: getLeftBorderColour,
+          opacity: task.isComplete ? "0.3" : "1",
+          cursor: "pointer",
         }}
+        onClick={() => toggleComplete(task.id)}
       >
         <Stack>
           <Typography>{task.name}</Typography>
@@ -118,11 +124,22 @@ const TaskItem = ({ task }: props) => {
             {task.description}
           </Typography>
         </Stack>
-        <Stack direction="row">
-          <IconButton onClick={() => navigate(`${EDIT_TASK_ROUTE}/${task.id}`)}>
+        <Stack direction="row" className={TaskItemCSS["button-group"]}>
+          <IconButton
+            onClick={(e) => {
+              e.stopPropagation();
+              navigate(`${EDIT_TASK_ROUTE}/${task.id}`);
+            }}
+            className={TaskItemCSS["button"]}
+          >
             <EditIcon fontSize="small" />
           </IconButton>
-          <IconButton onClick={() => setOpen(true)}>
+          <IconButton
+            onClick={(e) => {
+              e.stopPropagation();
+              setOpen(true);
+            }}
+          >
             <DeleteIcon fontSize="small" />
           </IconButton>
         </Stack>
