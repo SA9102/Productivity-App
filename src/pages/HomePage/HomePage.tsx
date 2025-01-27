@@ -1,22 +1,5 @@
 // MUI
-import {
-  Box,
-  Typography,
-  Fab,
-  TextField,
-  Stack,
-  Checkbox,
-  FormGroup,
-  FormControlLabel,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Button,
-  ToggleButton,
-  ToggleButtonGroup,
-  LinearProgress,
-} from "@mui/material";
+import { Typography, Stack, Fab } from "@mui/material";
 // Icons
 import AddIcon from "@mui/icons-material/Add";
 
@@ -48,31 +31,32 @@ const HomePage = () => {
   };
 
   return (
-    <Stack gap="1rem" maxWidth="900px">
-      <Typography
-        variant="h4"
-        component="h1"
-        alignSelf="center"
-        textAlign="center"
-      >
-        Tasks
-      </Typography>
-      {tasks.length === 0 ? (
-        <Typography textAlign="center">
-          You don't have any tasks to do.
+    <>
+      <Stack gap="1rem" maxWidth="900px">
+        <Typography
+          variant="h4"
+          component="h1"
+          alignSelf="center"
+          textAlign="center"
+        >
+          Tasks
         </Typography>
-      ) : (
-        <>
-          <Stack direction="row" gap="1rem" alignItems="center"></Stack>
-          {/* TOOLBAR */}
-          <Toolbar
-            tasksLayout={tasksLayout}
-            onChangeLayout={handleChangeLayout}
-          />
-          <TasksList filter={filter} view={tasksLayout} />
-        </>
-      )}
-      {/* <NavLink
+        {tasks.length === 0 ? (
+          <Typography textAlign="center">
+            You don't have any tasks to do.
+          </Typography>
+        ) : (
+          <>
+            <Stack direction="row" gap="1rem" alignItems="center"></Stack>
+            {/* TOOLBAR */}
+            <Toolbar
+              tasksLayout={tasksLayout}
+              onChangeLayout={handleChangeLayout}
+            />
+            <TasksList filter={filter} view={tasksLayout} />
+          </>
+        )}
+        {/* <NavLink
         to={ADD_TASK_ROUTE}
         onClick={() =>
           localStorage.setItem("taskFilter", JSON.stringify(filter))
@@ -86,7 +70,20 @@ const HomePage = () => {
           <AddIcon />
         </Fab>
       </NavLink> */}
-    </Stack>
+      </Stack>
+      <NavLink to={ADD_TASK_ROUTE}>
+        <Fab
+          sx={{
+            borderRadius: "0.5rem",
+            position: "absolute",
+            bottom: 16,
+            right: 16,
+          }}
+        >
+          <AddIcon />
+        </Fab>
+      </NavLink>
+    </>
   );
 };
 

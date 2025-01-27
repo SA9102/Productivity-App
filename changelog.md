@@ -1,5 +1,12 @@
 # Change Log
 
+**27th January 2025**
+
+- Just like tasks, categories are now also part of global state.
+- Can optionally assign a category to task.
+- Category is represented within a chip next to the task name.
+- Cannot create categories or assign colours yet.
+
 **26th January 2025**
 
 - Clicking on a task will mark it as complete and will make it transparent.

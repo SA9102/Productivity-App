@@ -6,15 +6,15 @@ const dummyTasks: taskType[] = [
   {
     id: "1",
     name: "Foo",
-    category: "Travel",
+    category: "3",
     description: "Desc",
     priority: "low",
-    isComplete: true,
+    isComplete: false,
   },
   {
     id: "2",
     name: "Bar",
-    category: "Food",
+    category: "2",
     description: "Description of Bar",
     priority: "high",
     isComplete: true,
@@ -22,7 +22,7 @@ const dummyTasks: taskType[] = [
   {
     id: "3",
     name: "Baz",
-    category: "Travel",
+    category: "",
     description: "Description of Baz",
     priority: "medium",
     isComplete: false,
@@ -30,7 +30,7 @@ const dummyTasks: taskType[] = [
   {
     id: "4",
     name: "Foobar",
-    category: "Work",
+    category: "",
     description: "Description of Foobar",
     priority: "none",
     isComplete: false,
@@ -38,7 +38,7 @@ const dummyTasks: taskType[] = [
   {
     id: "5",
     name: "Qux",
-    category: "Travel",
+    category: "1",
     description: "Description of Qux",
     priority: "low",
     isComplete: true,

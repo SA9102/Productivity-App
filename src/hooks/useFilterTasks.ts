@@ -1,5 +1,5 @@
 import useTaskStore from "../store/taskStore";
-import taskFilterType from "../types/taskFilterType";
+import taskFilterType from "../types/tasksFilterType";
 
 const useFilterTasks = (filter: taskFilterType) => {
   // Grab all tasks from global state

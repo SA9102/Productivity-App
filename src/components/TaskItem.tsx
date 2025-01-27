@@ -16,6 +16,7 @@ import {
   DialogActions,
   Button,
   Box,
+  Chip,
   Stack,
 } from "@mui/material";
 // MUI Icons
@@ -34,6 +35,7 @@ import { EDIT_TASK_ROUTE } from "../utils/fullRoutes";
 import { useLongPress } from "use-long-press";
 import { useMemo, useState } from "react";
 import { grey, green, orange, red } from "@mui/material/colors";
+import useCategoryStore from "../store/categoryStore";
 
 type props = {
   task: taskType;
@@ -52,6 +54,8 @@ const TaskItem = ({ task }: props) => {
     console.log(taskId);
     navigate(`${EDIT_TASK_ROUTE}/${taskId}`);
   });
+
+  const categories = useCategoryStore((state) => state.categories);
 
   // The colour of the left border represents the priority,
   // or no colour if no priority. The colour shade depends on
@@ -77,6 +81,12 @@ const TaskItem = ({ task }: props) => {
       : task.priority === "high"
       ? red[800]
       : "transparent";
+  };
+
+  console.log("CATEGORIES", categories);
+
+  const getCategoryById = (id: string) => {
+    return categories.find((category) => category.id === id);
   };
 
   // const menuItems = useMemo(
@@ -119,7 +129,23 @@ const TaskItem = ({ task }: props) => {
         onClick={() => toggleComplete(task.id)}
       >
         <Stack>
-          <Typography>{task.name}</Typography>
+          <Stack direction="row" gap="0.5rem" alignItems="center">
+            <Typography>{task.name}</Typography>
+            {task.category !== "" && (
+              <Chip
+                // sx={{ fontSize: "0.3rem", padding:  }}
+                sx={{
+                  fontSize: "0.7rem", // Adjust the font size
+                  height: "18px", // Adjust the height
+                  padding: "0", // Adjust padding
+                  backgroundColor: getCategoryById(task.category)!.colour,
+                }}
+                size="small"
+                // label="Hello"
+                label={getCategoryById(task.category)!.name}
+              />
+            )}
+          </Stack>
           <Typography sx={{ fontSize: "0.7rem", fontWeight: "300" }}>
             {task.description}
           </Typography>

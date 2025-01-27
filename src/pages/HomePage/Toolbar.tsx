@@ -9,11 +9,23 @@ import {
   ToggleButtonGroup,
   ToggleButton,
   LinearProgress,
+  IconButton,
+  TextField,
+  Dialog,
+  DialogTitle,
+  DialogContent,
 } from "@mui/material";
-import ListIcon from "@mui/icons-material/List";
-import GridViewIcon from "@mui/icons-material/GridView";
 import useTaskStore from "../../store/taskStore";
 import tasksLayoutType from "../../types/tasksLayoutType";
+import { grey } from "@mui/material/colors";
+// MUI Icons
+import AddIcon from "@mui/icons-material/Add";
+import ListIcon from "@mui/icons-material/List";
+import GridViewIcon from "@mui/icons-material/GridView";
+import { useState } from "react";
+import useFilterTasks from "../../hooks/useFilterTasks";
+import taskFilterType from "../../types/tasksFilterType";
+import defaultTasksFilters from "../../utils/defaultTasksFilters";
 
 type props = {
   tasksLayout: tasksLayoutType;
@@ -26,31 +38,49 @@ const Toolbar = ({ tasksLayout, onChangeLayout }: props) => {
     (state) => state.getCompletedTasksNumber
   );
 
+  const [open, setOpen] = useState(false);
+
   const normalise = () => (getCompletedTasksNumber() * 100) / getTasksNumber();
+
+  // const [filters, setFilters] = useState<taskFilterType>(defaultTasksFilters);
+
+  // const tasksFiltered = useFilterTasks(filters);
 
   return (
     <>
-      <Stack>
-        <Button>New Task</Button>
-        <Box>
-          <Typography>Layout</Typography>
-          <ToggleButtonGroup
-            value={tasksLayout}
-            onChange={onChangeLayout}
-            exclusive
-            size="small"
-          >
-            <ToggleButton value="list">
-              <ListIcon />
-            </ToggleButton>
-            <ToggleButton value="grid">
-              <GridViewIcon />
-            </ToggleButton>
-          </ToggleButtonGroup>
-        </Box>
+      <Stack
+        direction="row"
+        alignItems="center"
+        gap="1rem"
+        // sx={{ backgroundColor: grey[900] }}
+      >
+        {/* <Typography>Layout</Typography> */}
+        <ToggleButtonGroup
+          value={tasksLayout}
+          onChange={onChangeLayout}
+          exclusive
+          size="small"
+        >
+          <ToggleButton value="list">
+            <ListIcon />
+          </ToggleButton>
+          <ToggleButton value="grid">
+            <GridViewIcon />
+          </ToggleButton>
+        </ToggleButtonGroup>
+        {/* </Box> */}
+        {/* <TextField size="small" /> */}
+        {/* <Button variant="outlined" onClick={() => setOpen(true)}>
+          Filter Options
+        </Button> */}
+        {/* <LinearProgress variant="determinate" value={normalise()} /> */}
       </Stack>
-
-      <LinearProgress variant="determinate" value={normalise()} />
+      <Dialog open={open} onClose={() => setOpen(false)} fullWidth>
+        <DialogTitle>Filter Options</DialogTitle>
+        <DialogContent>
+          <TextField size="small" />
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

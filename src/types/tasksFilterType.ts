@@ -1,6 +1,6 @@
 /*** The type for task filters ***/
 
-type taskFilterType = {
+type tasksFilterType = {
   text: string;
   priority: {
     none: boolean;
@@ -10,4 +10,4 @@ type taskFilterType = {
   };
 };
 
-export default taskFilterType;
+export default tasksFilterType;

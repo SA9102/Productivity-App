@@ -24,6 +24,7 @@ import { HOME_ROUTE } from "../utils/fullRoutes";
 // Store imports
 import useTaskStore from "../store/taskStore";
 import getLastRouteSegment from "../utils/functions/getLastRouteSegment";
+import useCategoryStore from "../store/categoryStore";
 
 // This page renders the input fields for a task.
 // This is used either when adding a new task, or when editing a task that exists.
@@ -39,6 +40,8 @@ const TaskForm = () => {
   const [priority, setPriority] = useState<1 | 2 | 3>(1);
 
   const [isAddingTask, setIsAddingTask] = useState(true);
+
+  const categories = useCategoryStore((state) => state.categories);
 
   /*
   When the page is rendered the first time, we get the route.
@@ -56,6 +59,8 @@ const TaskForm = () => {
       setTaskInput(task!);
     }
   }, []);
+
+  console.log(taskInput.category);
 
   return (
     <>
@@ -84,9 +89,19 @@ const TaskForm = () => {
           multiline
           rows={8}
         />
-        <TextField select label="Category" defaultValue="None">
-          <MenuItem value="none">None</MenuItem>
-          <MenuItem value="travel">Travel</MenuItem>
+        <TextField
+          select
+          label="Category"
+          defaultValue="None"
+          value={taskInput.category}
+          onChange={(e) =>
+            setTaskInput({ ...taskInput, category: e.target.value })
+          }
+        >
+          <MenuItem value="">None</MenuItem>
+          {categories.map((category) => (
+            <MenuItem value={category.id}>{category.name}</MenuItem>
+          ))}
         </TextField>
         <ButtonGroup variant="contained">
           <Button

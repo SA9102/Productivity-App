@@ -62,7 +62,7 @@ const App = () => {
           <LightModeIcon />
         </IconButton>
       </Stack>
-      <Box sx={{ margin: "0.5rem 2rem" }}>
+      <Box sx={{ margin: "0.5rem 1rem" }}>
         <Routes>
           <Route path={HOME_ROUTE} element={<HomePage />} />
           <Route path={ADD_TASK_ROUTE} element={<TaskEntryPage />} />
