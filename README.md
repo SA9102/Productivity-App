@@ -32,8 +32,10 @@ My focus right now is on the functionality, so the user interface isn't very app
 - Add tasks
 - Edit tasks
 - Delete tasks
+- Mark tasks as complete
+- Delete all completed tasks at once
 - Give tasks a name, and optionally a description, category and priority
-- Remove all completed tasks at once
+- Create new categories
 - Filter tasks by text within their name or description
 
 See [requirements.md](requirements.md) about the planned features.

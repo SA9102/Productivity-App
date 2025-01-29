@@ -1,5 +1,9 @@
 # Change Log
 
+**29th January 2025**
+
+- Can create new categories. Choose name and colour.
+
 **27th January 2025**
 
 - Just like tasks, categories are now also part of global state.

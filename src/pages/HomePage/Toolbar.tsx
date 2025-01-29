@@ -26,6 +26,8 @@ import { useState } from "react";
 import useFilterTasks from "../../hooks/useFilterTasks";
 import taskFilterType from "../../types/tasksFilterType";
 import defaultTasksFilters from "../../utils/defaultTasksFilters";
+import { NavLink } from "react-router";
+import { MANAGE_CATEGORIES_ROUTE } from "../../utils/fullRoutes";
 
 type props = {
   tasksLayout: tasksLayoutType;
@@ -70,17 +72,19 @@ const Toolbar = ({ tasksLayout, onChangeLayout }: props) => {
         </ToggleButtonGroup>
         {/* </Box> */}
         {/* <TextField size="small" /> */}
-        {/* <Button variant="outlined" onClick={() => setOpen(true)}>
-          Filter Options
-        </Button> */}
+        <NavLink to={MANAGE_CATEGORIES_ROUTE}>
+          <Button variant="outlined" size="small" onClick={() => setOpen(true)}>
+            Manage Categories
+          </Button>
+        </NavLink>
         {/* <LinearProgress variant="determinate" value={normalise()} /> */}
       </Stack>
-      <Dialog open={open} onClose={() => setOpen(false)} fullWidth>
+      {/* <Dialog open={open} onClose={() => setOpen(false)} fullWidth>
         <DialogTitle>Filter Options</DialogTitle>
         <DialogContent>
           <TextField size="small" />
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
     </>
   );
 };

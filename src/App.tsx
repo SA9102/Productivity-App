@@ -18,6 +18,7 @@ import {
   HOME_ROUTE,
   ADD_TASK_ROUTE,
   EDIT_TASK_ROUTE,
+  MANAGE_CATEGORIES_ROUTE,
 } from "./utils/fullRoutes";
 
 // Custom components
@@ -31,6 +32,7 @@ import TaskEntryPage from "./pages/TaskEntryPage";
 // React Router
 import { Routes, Route, useLocation } from "react-router";
 import { useState } from "react";
+import ManageCategoriesPage from "./pages/ManageCategoriesPage";
 
 const App = () => {
   const path = useLocation().pathname;
@@ -69,6 +71,10 @@ const App = () => {
           <Route
             path={EDIT_TASK_ROUTE + "/:taskId"}
             element={<TaskEntryPage />}
+          />
+          <Route
+            path={MANAGE_CATEGORIES_ROUTE}
+            element={<ManageCategoriesPage />}
           />
         </Routes>
       </Box>
