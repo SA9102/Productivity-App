@@ -1,5 +1,9 @@
 # Change Log
 
+<!-- **30th January 2025**
+
+- Can delete categories, and edit category names and colours. These changes will be reflected within the tasks that are labelled within those categories. -->
+
 **29th January 2025**
 
 - Can create new categories. Choose name and colour.
