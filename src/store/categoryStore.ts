@@ -7,7 +7,8 @@ type state = {
 };
 
 type actions = {
-  addCategory: (task: categoryType) => void;
+  addCategory: (category: categoryType) => void;
+  updateCategory: (updatedCategory: categoryType) => void;
 };
 
 const useCategoryStore = create<state & actions>()((set) => ({
@@ -15,6 +16,15 @@ const useCategoryStore = create<state & actions>()((set) => ({
   addCategory: (category: categoryType) =>
     set((state) => ({
       categories: [...state.categories, category],
+    })),
+  updateCategory: (updatedCategory: categoryType) =>
+    set((state) => ({
+      categories: state.categories.map((category: categoryType) => {
+        if (category.id === updatedCategory.id) {
+          return updatedCategory;
+        }
+        return category;
+      }),
     })),
 }));
 

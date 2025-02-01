@@ -16,19 +16,19 @@ import useCategoryStore from "../store/categoryStore";
 import { useNavigate } from "react-router";
 import { HOME_ROUTE } from "../utils/fullRoutes";
 import { grey } from "@mui/material/colors";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
+
 import PopoverPicker from "../components/PopoverPicker";
 import SwatchesPicker from "../components/SwatchesPicker";
+import CategoryItem from "../components/CategoryItem";
 
 const ManageCategoriesPage = () => {
   const categories = useCategoryStore((state) => state.categories);
   const addCategory = useCategoryStore((state) => state.addCategory);
+  const updateCategory = useCategoryStore((state) => state.updateCategory);
   const navigate = useNavigate();
   const [categoryInput, setCategoryInput] = useState<categoryType>(
     getEmptyCategory()
   );
-  const [colour, setColour] = useState("#ffffff");
   const presetColours = ["#cd9323", "#1a53d8", "#9a2151", "#0d6416", "#8d2808"];
 
   const handleChangeColour = (newColour) => {
@@ -43,37 +43,7 @@ const ManageCategoriesPage = () => {
         <FormControl fullWidth sx={{ display: "flex", gap: "1rem" }}>
           <Typography>Edit Categories</Typography>
           {categories.map((category) => (
-            <Paper
-              sx={{
-                flex: 1,
-                // height: "50px",
-                backgroundColor: grey[900],
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                cursor: "pointer",
-              }}
-            >
-              <Stack flexDirection="row">
-                <Typography width="130px">{category.name}</Typography>
-                {/* <PopoverPicker colour={category.colour} onChange={setColour} /> */}
-                <SwatchesPicker
-                  colour={colour}
-                  onChange={setColour}
-                  presetColours={presetColours}
-                />
-              </Stack>
-              {/* <Box></Box> */}
-
-              <ButtonGroup>
-                <IconButton>
-                  <EditIcon />
-                </IconButton>
-                <IconButton>
-                  <DeleteIcon />
-                </IconButton>
-              </ButtonGroup>
-            </Paper>
+            <CategoryItem cat={category} presetColours={presetColours} />
           ))}
         </FormControl>
         <FormControl fullWidth sx={{ display: "flex", gap: "1rem" }}>
@@ -89,8 +59,11 @@ const ManageCategoriesPage = () => {
             }
             required
           />
-          <Typography>OK</Typography>
-          <PopoverPicker colour={colour} onChange={setColour} />
+          <SwatchesPicker
+            colour={categoryInput.colour}
+            onChange={handleChangeColour}
+            presetColours={presetColours}
+          />
           <Button
             variant="contained"
             onClick={() => {

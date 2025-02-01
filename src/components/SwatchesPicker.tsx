@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import { useCallback, useRef, useState } from "react";
 import { HexColorPicker } from "react-colorful";
 import useClickOutside from "../hooks/useClickOutside";
@@ -10,7 +10,11 @@ const SwatchesPicker = ({ colour, onChange, presetColours }) => {
   const close = useCallback(() => toggleOpen(false), []);
   useClickOutside(popover, close);
   return (
-    <Box>
+    <Stack
+      flexDirection="row"
+      alignItems="center"
+      //   sx={{ width: "300px", background: "#f0f0f4", borderRadius: "9px" }}
+    >
       {/* <HexColorPicker color={colour} onChange={onChange} /> */}
       <Box
         sx={{
@@ -18,7 +22,7 @@ const SwatchesPicker = ({ colour, onChange, presetColours }) => {
           width: "28px",
           height: "28px",
           borderRadius: "8px",
-          border: "3px solid #fff",
+          //   border: "3px solid ",
           boxShadow:
             "0 0 0 1px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(0, 0, 0, 0.1)",
           cursor: "pointer",
@@ -28,7 +32,26 @@ const SwatchesPicker = ({ colour, onChange, presetColours }) => {
       {isOpen && (
         <Box
           ref={popover}
-          sx={{ display: "flex", padding: "12px", flexWrap: "wrap" }}
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            // padding: "12px",
+            flexWrap: "wrap",
+            // width: "300px",
+            // background: "#f0f0f4",
+            borderRadius: "9px",
+          }}
+          //   sx={{
+          //     display: "flex",
+          //     padding: "12px",
+          //     flexWrap: "wrap",
+          //     position: "absolute",
+          //     top: "calc(100% + 2px)",
+          //     left: "0",
+          //     borderRadius: "9px",
+          //     boxShadow: "0 6px 12px rgba(0, 0, 0, 0.15)",
+          //     zIndex: "999",
+          //   }}
         >
           {presetColours.map((presetColour) => (
             <button
@@ -44,12 +67,15 @@ const SwatchesPicker = ({ colour, onChange, presetColours }) => {
                 outline: "none",
                 backgroundColor: presetColour,
               }}
-              onClick={() => onChange(presetColour)}
+              onClick={() => {
+                onChange(presetColour);
+                close();
+              }}
             />
           ))}
         </Box>
       )}
-    </Box>
+    </Stack>
   );
 };
 
