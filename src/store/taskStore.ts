@@ -12,6 +12,8 @@ type actions = {
   addTask: (task: taskType) => void;
   updateTask: (updatedTask: taskType) => void;
   deleteTask: (taskId: string) => void;
+  removeCategory: (categoryId: string) => void; // When a category is deleted, make sure that all tasks that
+  // were pointing to this category, don't point to it anymore
   toggleComplete: (taskId: string) => void;
   sortTasks: (criterion: "name" | "priority") => void;
   getTasksNumber: () => number;
@@ -97,7 +99,15 @@ const useTaskStore = create<state & actions>()((set, get) => ({
   //     tasks: state.tasks.sort(compare),
   //   }));
   // },
-
+  removeCategory: (categoryId: string) =>
+    set((state) => ({
+      tasks: state.tasks.map((task: taskType) => {
+        if (task.category === categoryId) {
+          task.category = "";
+        }
+        return task;
+      }),
+    })),
   sortTasks: (criterion) => {
     const compare = (taskA: taskType, taskB: taskType) => {
       if (criterion === "name") {

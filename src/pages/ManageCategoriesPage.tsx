@@ -43,7 +43,11 @@ const ManageCategoriesPage = () => {
         <FormControl fullWidth sx={{ display: "flex", gap: "1rem" }}>
           <Typography>Edit Categories</Typography>
           {categories.map((category) => (
-            <CategoryItem cat={category} presetColours={presetColours} />
+            <CategoryItem
+              key={category.id}
+              cat={category}
+              presetColours={presetColours}
+            />
           ))}
         </FormControl>
         <FormControl fullWidth sx={{ display: "flex", gap: "1rem" }}>

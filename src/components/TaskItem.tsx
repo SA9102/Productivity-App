@@ -44,7 +44,6 @@ type props = {
 // Renders a 'task item' to the screen
 const TaskItem = ({ task }: props) => {
   const [open, setOpen] = useState(false);
-
   const theme = useTheme();
   const toggleComplete = useTaskStore((state) => state.toggleComplete);
   const deleteTask = useTaskStore((state) => state.deleteTask);

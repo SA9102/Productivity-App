@@ -9,6 +9,7 @@ type state = {
 type actions = {
   addCategory: (category: categoryType) => void;
   updateCategory: (updatedCategory: categoryType) => void;
+  deleteCategory: (categoryId: string) => void;
 };
 
 const useCategoryStore = create<state & actions>()((set) => ({
@@ -25,6 +26,12 @@ const useCategoryStore = create<state & actions>()((set) => ({
         }
         return category;
       }),
+    })),
+  deleteCategory: (categoryId: string) =>
+    set((state) => ({
+      categories: state.categories.filter(
+        (category) => category.id !== categoryId
+      ),
     })),
 }));
 

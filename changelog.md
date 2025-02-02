@@ -1,8 +1,13 @@
 # Change Log
 
-<!-- **30th January 2025**
+**2nd February 2025**
 
-- Can delete categories, and edit category names and colours. These changes will be reflected within the tasks that are labelled within those categories. -->
+- Can edit category names and delete categories.
+- If a category is deleted, then tasks that were in that category will instead not be in any category.
+
+**1st February 2025**
+
+- Can edit category colours. These changes will be reflected within the tasks that are labelled within those categories.
 
 **29th January 2025**
 
