@@ -1,10 +1,13 @@
-import TaskItemCSS from "./TaskItem.module.css";
+/***
+RENDERS A 'TASK ITEM' TO THE SCREEN.
+***/
 
+// React
+import { useState } from "react";
+// CSS
+import TaskItemCSS from "./TaskItem.module.css";
 // MUI components
 import {
-  Card,
-  CardActions,
-  CardContent,
   IconButton,
   Typography,
   Paper,
@@ -15,44 +18,34 @@ import {
   DialogContentText,
   DialogActions,
   Button,
-  Box,
   Chip,
   Stack,
 } from "@mui/material";
 // MUI Icons
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+// MUI colours
+import { grey, green, orange, red } from "@mui/material/colors";
 // Store
 import useTaskStore from "../store/taskStore";
+import useCategoryStore from "../store/categoryStore";
 // Types
 import taskType from "../types/taskType";
 // React Router
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 // Utils
 import { EDIT_TASK_ROUTE } from "../utils/fullRoutes";
-// Other external packages
-import { useLongPress } from "use-long-press";
-import { useMemo, useState } from "react";
-import { grey, green, orange, red } from "@mui/material/colors";
-import useCategoryStore from "../store/categoryStore";
 
 type props = {
   task: taskType;
 };
 
-// Renders a 'task item' to the screen
 const TaskItem = ({ task }: props) => {
   const [open, setOpen] = useState(false);
   const theme = useTheme();
   const toggleComplete = useTaskStore((state) => state.toggleComplete);
   const deleteTask = useTaskStore((state) => state.deleteTask);
   const navigate = useNavigate();
-  const bind = useLongPress((taskId) => {
-    console.log("USE LONG PRESS");
-    console.log(taskId);
-    navigate(`${EDIT_TASK_ROUTE}/${taskId}`);
-  });
 
   const categories = useCategoryStore((state) => state.categories);
 
@@ -82,29 +75,9 @@ const TaskItem = ({ task }: props) => {
       : "transparent";
   };
 
-  console.log("CATEGORIES", categories);
-
   const getCategoryById = (id: string) => {
     return categories.find((category) => category.id === id);
   };
-
-  // const menuItems = useMemo(
-  //   () => [
-  //     {
-  //       name: "Edit",
-  //       onClick: () => {
-  //         navigate(`${EDIT_TASK_ROUTE}/${task.id}`);
-  //       },
-  //     },
-  //     {
-  //       name: "Delete",
-  //       onClick: () => {
-  //         removeTask(task.id);
-  //       },
-  //     },
-  //   ],
-  //   [navigate, task.id]
-  // );
 
   return (
     <>
@@ -132,7 +105,6 @@ const TaskItem = ({ task }: props) => {
             <Typography>{task.name}</Typography>
             {task.category !== "" && (
               <Chip
-                // sx={{ fontSize: "0.3rem", padding:  }}
                 sx={{
                   fontSize: "0.7rem", // Adjust the font size
                   height: "18px", // Adjust the height
@@ -140,7 +112,6 @@ const TaskItem = ({ task }: props) => {
                   backgroundColor: getCategoryById(task.category)!.colour,
                 }}
                 size="small"
-                // label="Hello"
                 label={getCategoryById(task.category)!.name}
               />
             )}
@@ -191,60 +162,6 @@ const TaskItem = ({ task }: props) => {
         </DialogActions>
       </Dialog>
     </>
-    // <Card
-    //   variant="outlined"
-    //   key={task.id}
-    //   onClick={() => toggleComplete(task.id)}
-    //   {...bind(task.id)}
-    //   sx={{
-    //     display: "flex",
-    //     justifyContent: "space-between",
-    //     borderLeft:
-    // task.priority === "low"
-    //   ? "2px solid green"
-    //   : task.priority === "medium"
-    //   ? "2px solid orange"
-    //   : task.priority === "high"
-    //   ? "2px solid red"
-    //   : "",
-    //   }}
-    // >
-    //   <CardContent
-    //     sx={{
-    //       whiteSpace: "nowrap",
-    //       overflow: "hidden",
-    //     }}
-    //   >
-    //     {/* {task.isComplete ? (
-    //       <Typography sx={{ textDecoration: "line-through" }}>
-    //         {task.name}
-    //       </Typography>
-    //     ) : ( */}
-    //     <>
-    //       <Typography
-    //         sx={{ textDecoration: task.isComplete && "line-through" }}
-    //       >
-    //         {task.name}
-    //       </Typography>
-    //       {/* <Typography sx={{ fontSize: "0.8rem" }}>
-    //         {task.description}
-    //       </Typography> */}
-    //       {/* <Typography sx={{ fontSize: "0.8rem", fontStyle: "italic" }}>
-    //         <AccessTimeIcon sx={{ fontSize: "0.8rem" }} /> Hello
-    //       </Typography> */}
-    //     </>
-    //     {/* )} */}
-    //   </CardContent>
-    //   <CardActions>
-    //     {/* <Menu menuItems={menuItems} /> */}
-    //     <IconButton aria-label="edit">
-    //       <EditIcon />
-    //     </IconButton>
-    //     <IconButton aria-label="delete" color="error">
-    //       <DeleteIcon />
-    //     </IconButton>
-    //   </CardActions>
-    // </Card>
   );
 };
 

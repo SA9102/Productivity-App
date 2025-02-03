@@ -1,3 +1,10 @@
+/***
+DISPLAYS A 'CATEGORY ITEM', WHICH CONTAINS THE CATEGORY'S NAME AND COLOUR.
+THE CATEGORY ITEM IS EDITABLE AND DELETABLE.
+***/
+// React
+import { useState } from "react";
+// MUI components
 import {
   ButtonGroup,
   IconButton,
@@ -6,33 +13,40 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import SwatchesPicker from "./SwatchesPicker";
+// MUI Icons
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { useState } from "react";
-import { grey } from "@mui/material/colors";
-import useCategoryStore from "../store/categoryStore";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
+// MUI colours
+import { grey } from "@mui/material/colors";
+// Store
+import useCategoryStore from "../store/categoryStore";
 import useTaskStore from "../store/taskStore";
+// Custom components
+import SwatchesPicker from "./SwatchesPicker";
+// Custom types
+import categoryType from "../types/categoryType";
 
-const CategoryItem = ({ cat, presetColours }) => {
-  const [name, setName] = useState(cat.name);
-  const [category, setCategory] = useState(cat);
-  const [isEditing, setIsEditing] = useState(false);
+type props = {
+  cat: categoryType;
+  presetColours: string[];
+};
+
+const CategoryItem = ({ cat, presetColours }: props) => {
+  const [name, setName] = useState(cat.name); // Used for controlled input when editing the name
+  const [isEditing, setIsEditing] = useState(false); // Display typography or text field depending on this value
   const updateCategory = useCategoryStore((state) => state.updateCategory);
   const deleteCategory = useCategoryStore((state) => state.deleteCategory);
   const removeCategory = useTaskStore((state) => state.removeCategory);
 
-  const handleChangeColour = (string) => {
-    // setCategory({ ...category, colour: string });
-    updateCategory({ id: cat.id, name: cat.name, colour: string });
+  const handleChangeColour = (newColour: string) => {
+    updateCategory({ id: cat.id, name: cat.name, colour: newColour });
   };
   return (
     <Paper
       sx={{
         flex: 1,
-        // height: "50px",
         backgroundColor: grey[900],
         display: "flex",
         justifyContent: "space-between",
@@ -51,14 +65,12 @@ const CategoryItem = ({ cat, presetColours }) => {
           <Typography width="130px">{name}</Typography>
         )}
 
-        {/* <PopoverPicker colour={category.colour} onChange={setColour} /> */}
         <SwatchesPicker
           colour={cat.colour}
           onChange={handleChangeColour}
           presetColours={presetColours}
         />
       </Stack>
-      {/* <Box></Box> */}
 
       <ButtonGroup>
         {isEditing ? (

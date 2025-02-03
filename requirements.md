@@ -14,9 +14,9 @@ I may remove some of them if I think they are not very good. -->
 - [x] Remove all completed tasks at once
 - [ ] View all tasks that have been removed
 - [ ] Delete all tasks that have been removed
-- [ ] Create categories
-- [ ] Edit categories
-- [ ] Delete categories
+- [x] Create categories
+- [x] Edit categories
+- [x] Delete categories
 <!-- - [ ] Assign tasks to specific team members (intermediate) -->
 - [ ] Clone existing tasks for quick creation (basic)
 <!-- - [ ] Mark tasks as favorites for quick access (basic) -->

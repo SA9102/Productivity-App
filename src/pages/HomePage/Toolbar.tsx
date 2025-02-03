@@ -26,6 +26,7 @@ import { useState } from "react";
 import useFilterTasks from "../../hooks/useFilterTasks";
 import taskFilterType from "../../types/tasksFilterType";
 import defaultTasksFilters from "../../utils/defaultTasksFilters";
+import RemoveDoneIcon from "@mui/icons-material/RemoveDone";
 import { NavLink } from "react-router";
 import { MANAGE_CATEGORIES_ROUTE } from "../../utils/fullRoutes";
 
@@ -36,6 +37,9 @@ type props = {
 
 const Toolbar = ({ tasksLayout, onChangeLayout }: props) => {
   const getTasksNumber = useTaskStore((state) => state.getTasksNumber);
+  const deleteCompletedTasks = useTaskStore(
+    (state) => state.deleteCompletedTasks
+  );
   const getCompletedTasksNumber = useTaskStore(
     (state) => state.getCompletedTasksNumber
   );
@@ -70,6 +74,9 @@ const Toolbar = ({ tasksLayout, onChangeLayout }: props) => {
             <GridViewIcon />
           </ToggleButton>
         </ToggleButtonGroup>
+        <IconButton size="small" onClick={deleteCompletedTasks}>
+          <RemoveDoneIcon />
+        </IconButton>
         {/* </Box> */}
         {/* <TextField size="small" /> */}
         <NavLink to={MANAGE_CATEGORIES_ROUTE}>

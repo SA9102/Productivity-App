@@ -2,19 +2,15 @@
 
 Stay organised and focused with this simple yet efficient todo application.
 
+I took inspiration from [TodoApp by maciekt07](https://github.com/maciekt07/TodoApp).
+
 [View live demo on GitHub Pages](https://sa9102.github.io/Todo-App/)
 
 [View live demo + code on StackBlitz (Please allow up to 30-40 seconds for the live demo to load)](https://stackblitz.com/~/github.com/SA9102/Todo-App?initialPath=/Todo-App)
 
-This application is still in development. I am working on refactoring and making changes to the previous todo app that I was working on before. See the 'legacy' branch for the old version of the application.
-
-This new version will not only feature a better UI, but also cleaner and more structured code.
-
-This is the master branch which contains the refactored application. To view the old application, see the 'legacy' branch.
-
 ![Tasks page with a task named 'Foobar'](image.png)
 
-My focus right now is on the functionality, so the user interface isn't very appealing at the moment, but I will work on this as the application takes shape.
+Currently, the application is being designed for mobile devices. The design will be improved for larger screens as the application takes shape.
 
 ## Tech Stack
 
@@ -36,6 +32,7 @@ My focus right now is on the functionality, so the user interface isn't very app
 - Delete all completed tasks at once
 - Give tasks a name, and optionally a description, category and priority
 - Create new categories
+- Edit and delete categories
 - Filter tasks by text within their name or description
 
 See [requirements.md](requirements.md) about the planned features.

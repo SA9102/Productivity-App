@@ -1,4 +1,6 @@
-/*** The area in the Home page where users can filter tasks ***/
+/***
+THE AREA IN THE HOME PAGE WHERE USERS CAN FILTER TASKS.
+***/
 
 // React
 import { useState } from "react";

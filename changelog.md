@@ -1,5 +1,9 @@
 # Change Log
 
+**3rd February 2025**
+
+- Button to delete all completed tasks at once.
+
 **2nd February 2025**
 
 - Can edit category names and delete categories.

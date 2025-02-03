@@ -1,10 +1,6 @@
 import {
-  Box,
   Button,
-  ButtonGroup,
   FormControl,
-  IconButton,
-  Paper,
   Stack,
   TextField,
   Typography,
@@ -15,23 +11,19 @@ import getEmptyCategory from "../utils/functions/getEmptyCategory";
 import useCategoryStore from "../store/categoryStore";
 import { useNavigate } from "react-router";
 import { HOME_ROUTE } from "../utils/fullRoutes";
-import { grey } from "@mui/material/colors";
-
-import PopoverPicker from "../components/PopoverPicker";
 import SwatchesPicker from "../components/SwatchesPicker";
 import CategoryItem from "../components/CategoryItem";
 
 const ManageCategoriesPage = () => {
   const categories = useCategoryStore((state) => state.categories);
   const addCategory = useCategoryStore((state) => state.addCategory);
-  const updateCategory = useCategoryStore((state) => state.updateCategory);
   const navigate = useNavigate();
   const [categoryInput, setCategoryInput] = useState<categoryType>(
     getEmptyCategory()
   );
   const presetColours = ["#cd9323", "#1a53d8", "#9a2151", "#0d6416", "#8d2808"];
 
-  const handleChangeColour = (newColour) => {
+  const handleChangeColour = (newColour: string) => {
     setCategoryInput({ ...categoryInput, colour: newColour });
   };
   return (
@@ -72,7 +64,6 @@ const ManageCategoriesPage = () => {
             variant="contained"
             onClick={() => {
               addCategory(categoryInput);
-              // navigate(HOME_ROUTE);
             }}
           >
             Create Category
