@@ -103,7 +103,8 @@ const TaskForm = () => {
             <MenuItem value={category.id}>{category.name}</MenuItem>
           ))}
         </TextField>
-        <ButtonGroup variant="contained">
+        <Typography>Priority</Typography>
+        <ButtonGroup variant="contained" fullWidth>
           <Button
             onClick={() => setTaskInput({ ...taskInput, priority: "none" })}
             color={taskInput.priority === "none" ? "secondary" : "primary"}
